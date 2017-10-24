@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="forend:war">
+    <output-path>$PROJECT_DIR$/forend/target</output-path>
+    <root id="archive" name="yingyue-forend.war">
+      <element id="artifact" artifact-name="forend:war exploded" />
+    </root>
+  </artifact>
+</component>

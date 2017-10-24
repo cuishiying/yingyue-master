@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Profile | Klorofil - Free Bootstrap Dashboard Template</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/linearicons/style.css}">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" th:href="@{/static/assets/css/main.css}">
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <link rel="stylesheet" th:href="@{/static/assets/css/demo.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/datetimepicker/css/jquery.datetimepicker.css}">
+
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/static/assets/img/apple-icon.png}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/static/assets/img/favicon.png}">
+    <style type="text/css">
+        .item-name{
+            display: inline-block;
+            min-width: 100px;
+        }
+
+        .form-inline .item-content{
+            width: 50%;
+        }
+        .form-inline{
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<!-- WRAPPER -->
+<div id="wrapper">
+    <!-- NAVBAR -->
+    <nav th:replace="common/fragment :: navbar"></nav>
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <nav th:replace="common/fragment :: sidebar-nav"></nav>
+    <!-- END LEFT SIDEBAR -->
+    <!-- MAIN -->
+    <div class="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="panel panel-profile">
+                    <div class="clearfix">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">招募令</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-unstyled list-justify">
+                                <li class="form-inline"><label class="item-name">剧组</label> <input class="form-control item-content" id="title" ></li>
+                                <li class="form-inline"><label class="item-name">报名开始时间</label> <input class="form-control item-content date" id="startTime" ></li>
+                                <li class="form-inline"><label class="item-name">报名截至时间</label> <input class="form-control item-content date" id="endTime" ></li>
+                                <li class="form-inline"><label class="item-name">项目简介</label> <textarea class="form-control item-content" id="introduction" ></textarea></li>
+                                <li class="form-inline"><label class="item-name">联系人</label> <input class="form-control item-content" id="contacts" ></li>
+                                <li class="form-inline"><label class="item-name">联系方式</label> <input class="form-control item-content" id="phone" ></li>
+                                <li class="form-inline"><label class="item-name">邮箱</label> <input class="form-control item-content" id="email" type="email"></li>
+                                <li class="form-inline"><label class="item-name">地址</label> <input class="form-control item-content" id="address" ></li>
+                                <li class="form-inline"><label class="item-name">上传海报</label> <input class="form-control item-content" id="poster" ></li>
+
+                                <li class="form-inline">
+                                    <button type="button" class="btn btn-default close-window" onclick="javascript:history.back(-1);">关闭</button>
+                                    <button type="button" class="btn btn-primary save">保存</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN -->
+    <div class="clearfix"></div>
+    <footer>
+        <div class="container-fluid">
+            <p class="copyright">&copy; 2017 <a href="#" target="_blank">Theme I Need</a>. All Rights Reserved. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+        </div>
+    </footer>
+</div>
+<!-- END WRAPPER -->
+<!-- Javascript -->
+<script th:src="@{/static/assets/vendor/jquery/jquery.js}"></script>
+<script th:src="@{/static/assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/static/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/static/assets/scripts/klorofil-common.js}"></script>
+<script th:src="@{/static/assets/vendor/datetimepicker/js/jquery.datetimepicker.full.js}"></script>
+<script th:src="@{/static/assets/utils/httpUtils.js}"></script>
+
+<script type="text/javascript" th:inline="javascript">
+    var ctx = /*[[@{/}]]*/;
+
+    $(".date").datetimepicker({
+        lang:"ch", //语言选择中文 注：旧版本 新版方法：$.datetimepicker.setLocale('ch');
+        format:"Y-m-d H:i:00",      //格式化日期
+        roundTime: 'round',
+        timepicker:true,    //打开时间选项
+        step:1,
+        todayButton:false    //关闭选择今天按钮
+    });
+    $(".save").click(function () {
+        var recruit = new Object();
+        recruit.title = $("#title").val();
+        recruit.introduction = $("#introduction").val();
+        recruit.startTime = $("#startTime").val();
+        recruit.endTime = $("#endTime").val();
+        recruit.phone = $("#phone").val();
+        recruit.contacts = $("#contacts").val();
+        recruit.address = $("#address").val();
+        recruit.email = $("#email").val();
+        recruit.poster = $("#poster").val();
+        var checked = validateMsg(recruit);
+        if (!checked) return;
+        httpUtils.postJson(ctx + "recruit/releaseMessage",recruit,function (e) {
+            if(e.success){
+                alert("发布成功！");
+                window.location.href = ctx + "recruit/recruitManage";
+            }
+        })
+    });
+
+    function validateMsg(recruit) {
+        if (!recruit.title) {
+            alert("请填写剧组名称");
+            return false;
+        }
+        return true;
+    }
+
+</script>
+</body>
+
+</html>

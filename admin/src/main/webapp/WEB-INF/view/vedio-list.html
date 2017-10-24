@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>视频管理</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/linearicons/style.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/chartist/css/chartist-custom.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/datetimepicker/css/jquery.datetimepicker.css}">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" th:href="@{/static/assets/css/main.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/css/page.css}">
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <link rel="stylesheet" th:href="@{/static/assets/css/demo.css}">
+    <!-- GOOGLE FONTS -->
+    <!--<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">-->
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/static/assets/img/apple-icon.png}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/static/assets/img/favicon.png}">
+    <style type="text/css">
+        .form-inline{
+            margin: 10px;
+        }
+        .panel .panel-query a,button,input,select {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+<!-- WRAPPER -->
+<div id="wrapper">
+    <!-- NAVBAR -->
+    <nav th:replace="common/fragment :: navbar"></nav>
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <nav th:replace="common/fragment :: sidebar-nav"></nav>
+    <!-- END LEFT SIDEBAR -->
+    <!-- MAIN -->
+    <div class="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <!-- OVERVIEW -->
+                <div class="panel panel-headline">
+                    <!-- RECENT PURCHASES -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">视频管理</h3>
+                            <div class="right">
+                                <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+                                <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+                            </div>
+                        </div>
+
+                        <form th:action="@{/vedio}" method="get">
+                            <div class="controller form-inline">
+                                <a class="btn btn-primary" th:href="@{/vedio/add}">添加</a>
+                                <input type="text" name="keyword" class="form-control" th:value="${queryDTO.keyword}" placeholder="标题、简介..."/>
+                                <input type="text" class="form-control date" placeholder="开始时间" name="beginDate" th:value="${queryDTO.beginDate?.toString()}">
+                                <input type="text" class="form-control date" placeholder="结束时间" name="endDate" th:value="${queryDTO.endDate?.toString()}">
+                                <button type="submit" class="btn btn-primary">搜索</button>
+                            </div>
+                        </form>
+                        <div class="panel-body no-padding">
+                            <table class="table table-striped table-fixed">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%">选择</th>
+                                        <th style="width: 20%">标题</th>
+                                        <th style="width: 25%">简介</th>
+                                        <th style="width: 15%">海报</th>
+                                        <th style="width: 15%">创建时间</th>
+                                        <th style="width: 20%">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="item:${page.content}">
+                                        <td><label><input type="checkbox" value="remember-me"></label></td>
+                                        <td th:text="${item.name}" class="td-ellipsis"></td>
+                                        <td th:text="${item.intro}"  style="word-break: break-all"></td>
+                                        <td><img th:src="${item.imageUrl}" class="img-rounded img-responsive" style="width: auto;height: 70px"></td>
+                                        <td th:text="${#temporals.format(item.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                                        <td>
+                                            <a class="btn-sm btn-success" th:href="@{/vedio/play/}+${item.id}">播放</a>
+                                            <span th:switch="${item.online}">
+                                                <a th:case="true" class="btn-sm btn-success online" checked th:value="${item.id}">上线</a>
+                                                <a th:case="false" class="btn-sm btn-danger online"  th:value="${item.id}">下线</a>
+                                            </span>
+                                            <a class="btn-sm btn-danger delete" th:value="${item.id}">删除</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <!--<div class="col-md-4"><span class="panel-note"><i class="fa fa-clock-o"></i> Last 24 hours</span></div>-->
+                                <div class="col-md-12">
+                                    <!--分页-->
+                                    <nav th:replace="common/page::paging"></nav>
+                                </div>
+                                <!--<div class="col-md-4 text-right"><a href="#" class="btn btn-primary">View All Purchases</a></div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END RECENT PURCHASES -->
+                </div>
+                <!-- END OVERVIEW -->
+            </div>
+        </div>
+        <!-- END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN -->
+    <div class="clearfix"></div>
+    <footer>
+        <div class="container-fluid">
+            <!--<p class="copyright">&copy; 2017 <a href="#" target="_blank">Theme I Need</a>. All Rights Reserved. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>-->
+        </div>
+    </footer>
+</div>
+<!-- END WRAPPER -->
+<!-- Javascript -->
+<script th:src="@{/static/assets/vendor/jquery/jquery.js}"></script>
+<script th:src="@{/static/assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/static/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/static/assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js}"></script>
+<script th:src="@{/static/assets/vendor/chartist/js/chartist.min.js}"></script>
+<script th:src="@{/static/assets/scripts/klorofil-common.js}"></script>
+<script th:src="@{/static/assets/vendor/datetimepicker/js/jquery.datetimepicker.full.js}"></script>
+<script th:src="@{/static/assets/utils/httpUtils.js}"></script>
+
+<script type="text/javascript" th:inline="javascript">
+    var ctx = /*[[@{/}]]*/;
+
+    $('.date').datetimepicker({
+        lang:"ch", //语言选择中文 注：旧版本 新版方法：$.datetimepicker.setLocale('ch');
+        format:"Y-m-d",      //格式化日期
+        timepicker:false,    //关闭时间选项
+        yearStart:2000,     //设置最小年份
+        yearEnd:2050,        //设置最大年份
+        todayButton:false    //关闭选择今天按钮
+    });
+
+    $(document).on("click",".online",function (e) {
+        var checked = $(this).attr("checked")?false:true;
+        httpUtils.postParams(ctx+"vedio/online/"+$(this).attr("value"),{online:checked},function (e) {
+            if(e.success){
+                window.location.reload();
+            }
+        })
+    })
+    
+    $(".delete").click(function () {
+        httpUtils.postParams(ctx+"vedio/delete/"+$(this).attr("value"),"",function (e) {
+            if(e.success){
+                alert(e.data);
+                window.location.reload();
+            }else{
+                alert(e.message);
+            }
+        })
+    });
+</script>
+</body>
+</html>

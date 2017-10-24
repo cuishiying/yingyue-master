@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+</head>
+<!-- NAVBAR -->
+<nav th:fragment="navbar" class="navbar navbar-default navbar-fixed-top">
+	<div class="brand">
+		<a href="index.html"><img th:src="@{/static/assets/img/logo-dark.png}" alt="Klorofil Logo" class="img-responsive logo"></a>
+	</div>
+	<div class="container-fluid">
+		<div class="navbar-btn">
+			<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+		</div>
+		<form class="navbar-form navbar-left">
+			<div class="input-group">
+				<input type="text" value="" class="form-control" placeholder="搜索仪表...">
+				<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
+			</div>
+		</form>
+		<div class="navbar-btn navbar-btn-right">
+			<a class="btn btn-success update-pro" href="#downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>版本升级</span></a>
+		</div>
+		<div id="navbar-menu">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+						<i class="lnr lnr-alarm"></i>
+						<span class="badge bg-danger">5</span>
+					</a>
+					<ul class="dropdown-menu notifications">
+						<li><a href="#" class="notification-item"><span class="dot bg-warning"></span>系统通知</a></li>
+						<li><a href="#" class="notification-item"><span class="dot bg-danger"></span>警报</a></li>
+						<li><a href="#" class="notification-item"><span class="dot bg-success"></span>审批通过</a></li>
+						<li><a href="#" class="more">查看所有通知</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>帮助</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">基本信息</a></li>
+						<li><a href="#">工作日记</a></li>
+						<li><a href="#">安全风险</a></li>
+						<li><a href="#">版本查询</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img th:src="@{/static/assets/img/user.png}" class="img-circle" alt="Avatar"> <span sec:authentication="name">Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+					<ul class="dropdown-menu">
+						<li><a th:href="@{/index/userinfo}"><i class="lnr lnr-user"></i> <span>我的信息</span></a></li>
+						<li><a href="#"><i class="lnr lnr-envelope"></i> <span>消息</span></a></li>
+						<li><a href="#"><i class="lnr lnr-cog"></i> <span>设置</span></a></li>
+						<li><a th:href="@{/logout}"><i class="lnr lnr-exit"></i> <span>退出</span></a></li>
+					</ul>
+				</li>
+				<!-- <li>
+                    <a class="update-pro" href="#downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
+                </li> -->
+			</ul>
+		</div>
+	</div>
+</nav>
+<!-- END NAVBAR -->
+<!-- LEFT SIDEBAR -->
+<nav th:fragment="sidebar-nav" id="sidebar-nav" class="sidebar">
+	<div class="sidebar-scroll">
+		<nav>
+			<ul class="nav">
+				<li><a th:href="@{/index}" class="active"><i class="lnr lnr-home"></i> <span>首页</span></a></li>
+				<li>
+					<a href="#collapseOne" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>客户管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+					<div id="collapseOne" class="collapse ">
+						<ul class="nav">
+							<li sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin}" class="">客户管理</a></li>
+							<li><a th:href="@{/admin}" class="">员工管理</a></li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<a href="#collapseTwo" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>演员招募</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+					<div id="collapseTwo" class="collapse ">
+						<ul class="nav">
+							<li><a th:href="@{/recruit/releaseMessage}" class="">发布信息</a></li>
+							<li><a th:href="@{/recruit/recruitManage}" class="">招募管理</a></li>
+							<li><a th:href="@{/recruit/signupManage}" class="">报名管理</a></li>
+							<li><a th:href="@{/recruit/releaseMessage}" class="">签约管理</a></li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<a href="#collapseThree" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>剧本征集</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+					<div id="collapseThree" class="collapse ">
+						<ul class="nav">
+							<li><a href="page-profile.html" class="">尚未开放</a></li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<a href="#collapseFour" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>班前培训</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+					<div id="collapseFour" class="collapse ">
+						<ul class="nav">
+							<li><a href="page-login.html" class="">尚未开放</a></li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<a href="#collapseFive" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>幕后支持</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+					<div id="collapseFive" class="collapse ">
+						<ul class="nav">
+							<li><a href="page-login.html" class="">尚未开放</a></li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<a href="#collapseSix" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>发行合作</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+					<div id="collapseSix" class="collapse ">
+						<ul class="nav">
+							<li><a href="page-login.html" class="">尚未开放</a></li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<a href="#collapseSeven" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>商务合作</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+					<div id="collapseSeven" class="collapse ">
+						<ul class="nav">
+							<li><a href="page-login.html" class="">尚未开放</a></li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<a href="#collapseEight" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>活动大会</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+					<div id="collapseEight" class="collapse ">
+						<ul class="nav">
+							<li><a href="page-login.html" class="">尚未开放</a></li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<a href="#collapseNine" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>众筹管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+					<div id="collapseNine" class="collapse ">
+						<ul class="nav">
+							<li><a href="page-login.html" class="">尚未开放</a></li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<a href="#collapseTen" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>作品展示</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+					<div id="collapseTen" class="collapse ">
+						<ul class="nav">
+							<li><a th:href="@{/vedio}" class="">视频管理</a></li>
+						</ul>
+					</div>
+				</li>
+
+			</ul>
+		</nav>
+	</div>
+</nav>
+<!-- END LEFT SIDEBAR -->
+
+

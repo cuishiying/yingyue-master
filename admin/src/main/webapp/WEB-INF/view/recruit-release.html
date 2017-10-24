@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Profile | Klorofil - Free Bootstrap Dashboard Template</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/datetimepicker/css/jquery.datetimepicker.css}">
+
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/linearicons/style.css}">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" th:href="@{/static/assets/css/main.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/dropzone/dropzone.css}">
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <link rel="stylesheet" th:href="@{/static/assets/css/demo.css}">
+
+
+    <!-- GOOGLE FONTS -->
+    <!--<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">-->
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/static/assets/img/apple-icon.png}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/static/assets/img/favicon.png}">
+    <style type="text/css">
+        .item-name{
+            display: inline-block;
+            min-width: 100px;
+        }
+
+        .form-inline .item-content{
+            width: 50%;
+        }
+        .form-inline{
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<!-- WRAPPER -->
+<div id="wrapper">
+    <!-- NAVBAR -->
+    <nav th:replace="common/fragment :: navbar"></nav>
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <nav th:replace="common/fragment :: sidebar-nav"></nav>
+    <!-- END LEFT SIDEBAR -->
+    <!-- MAIN -->
+    <div class="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="panel panel-profile">
+                    <div class="clearfix">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">招募令</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal" id="releaseForm">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="title">剧组</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="title" name="title" class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="startTime">报名开始时间</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="startTime" name="startTime" class="form-control date" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="endTime">报名截至时间</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="endTime" name="endTime" class="form-control date" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="introduction">项目简介</label>
+                                    <div class="col-md-6">
+                                        <textarea type="text" id="introduction" name="introduction" class="form-control" placeholder="" rows="7"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="contacts">联系人</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="contacts" name="contacts" class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="phone">联系方式</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="phone" name="phone" class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="email">邮箱</label>
+                                    <div class="col-md-6">
+                                        <input type="email" id="email" name="email" class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="address">地址</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="address" name="address" class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">上传海报</label>
+                                    <div class="col-md-6">
+                                        <div class="dropzone img-content poster" id="myDropzone">
+                                            <div class="am-text-success dz-message">
+                                                <img src="" class="poster-img" style="display: none">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-md-6">-->
+                                        <!--<form th:action="@{/upload/uploadImg}" class="dropzone">-->
+                                            <!--<div class="fallback">-->
+                                                <!--<input name="file" type="file" multiple="" id="poster"/>-->
+                                            <!--</div>-->
+                                        <!--</form>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-8" style="text-align: center">
+                                        <button type="button" class="btn btn-default close-window" onclick="javascript:history.back(-1);">关闭</button>
+                                        <button type="button" class="btn btn-primary save">保存</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN -->
+    <div class="clearfix"></div>
+    <footer>
+        <div class="container-fluid">
+            <!--<p class="copyright">&copy; 2017 <a href="#" target="_blank">Theme I Need</a>. All Rights Reserved. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>-->
+        </div>
+    </footer>
+</div>
+<!-- END WRAPPER -->
+<!-- Javascript -->
+<script th:src="@{/static/assets/vendor/jquery/jquery.js}"></script>
+<script th:src="@{/static/assets/vendor/jquery-validation/jquery.validate.min.js}"></script>
+<!--<script th:src="@{/static/assets/vendor/jquery/jquery.min.js}"></script>-->
+<script th:src="@{/static/assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/static/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/static/assets/scripts/klorofil-common.js}"></script>
+<script th:src="@{/static/assets/vendor/dropzone/dropzone.min.js}"></script>
+<script th:src="@{/static/assets/vendor/datetimepicker/js/jquery.datetimepicker.full.js}"></script>
+<script th:src="@{/static/assets/utils/httpUtils.js}"></script>
+
+<script type="text/javascript" th:inline="javascript">
+    var ctx = /*[[@{/}]]*/;
+    var check;
+
+    //图片上传
+    Dropzone.autoDiscover = false;
+    $(".img-content").dropzone({
+        url: ctx+"upload/uploadImg",
+        maxFiles: 10,
+        maxFilesize: 512,
+        init:function () {
+            this.on("success",function (file, res) {
+                $(".poster-img").attr("src",res.data);
+                $(file.previewTemplate).children('.dz-error-message').css('opacity', '1')
+
+            });
+        }
+    });
+
+    //时间控件
+    $(".date").datetimepicker({
+        lang:"ch", //语言选择中文 注：旧版本 新版方法：$.datetimepicker.setLocale('ch');
+        format:"Y-m-d H:i:00",      //格式化日期
+        roundTime: 'round',
+        timepicker:true,    //打开时间选项
+        step:1,
+        todayButton:false    //关闭选择今天按钮
+    });
+
+
+    $(".save").click(function () {
+        var recruit = new Object();
+        recruit.title = $("#title").val();
+        recruit.introduction = $("#introduction").val();
+        recruit.startTime = $("#startTime").val();
+        recruit.endTime = $("#endTime").val();
+        recruit.phone = $("#phone").val();
+        recruit.contacts = $("#contacts").val();
+        recruit.address = $("#address").val();
+        recruit.email = $("#email").val();
+        recruit.poster = $(".poster-img").attr("src");
+        var res = validateContent();
+        if (!check.form()) return;
+        httpUtils.postJson(ctx + "recruit/releaseMessage",recruit,function (e) {
+            if(e.success){
+                alert("发布成功！");
+                window.location.href = ctx + "recruit/recruitManage";
+            }
+        })
+    });
+
+    $(document).ready(function () {
+        check = validateContent();
+    });
+    function validateContent(){
+        return $("#releaseForm").validate({
+            rules: {
+                title:"required",
+                introduction:{
+                    required:true,
+                    minlength:6
+                },
+                startTime:"required",
+                endTime:"required",
+                phone:{
+                    required:true,
+                    minlength:11
+                },
+                contacts:"required",
+                address:"required",
+                email:"required",
+                poster:"required"
+            },
+            messages: {
+                title:"请输入名称",
+                introduction:{
+                    required: "请输入简介",
+                    minlength: "至少6个字符"
+                },
+                startTime:"请输入开始时间",
+                endTime:"请输入开始时间",
+                phone:{
+                    required: "请输入手机号",
+                    minlength: "号码长度有误"
+                },
+                contacts:"请输入联系人",
+                address:"请输入地址",
+                email:"请输入邮箱地址",
+                poster:"请上传海报",
+            },
+            errorElement: "em",
+            errorPlacement: function ( error, element ) {
+                // Add the `help-block` class to the error element
+                error.addClass( "help-block" );
+
+                // Add `has-feedback` class to the parent div.form-group
+                // in order to add icons to inputs
+                element.parents( ".col-md-6" ).addClass( "has-feedback" );
+
+                if ( element.prop( "type" ) === "checkbox" ) {
+                    error.insertAfter( element.parent( "label" ) );
+                } else {
+                    error.insertAfter( element );
+                }
+
+                // Add the span element, if doesn't exists, and apply the icon classes to it.
+                if ( !element.next( "span" )[ 0 ] ) {
+                    $( "<span class='glyphicon glyphicon-remove form-control-feedback'></span>" ).insertAfter( element );
+                }
+            },
+            success: function ( label, element ) {
+                // Add the span element, if doesn't exists, and apply the icon classes to it.
+                if ( !$( element ).next( "span" )[ 0 ] ) {
+                    $( "<span class='glyphicon glyphicon-ok form-control-feedback'></span>" ).insertAfter( $( element ) );
+                }
+            },
+            highlight: function ( element, errorClass, validClass ) {
+                $( element ).parents( ".col-md-6" ).addClass( "has-error" ).removeClass( "has-success" );
+                $( element ).next( "span" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
+            },
+            unhighlight: function ( element, errorClass, validClass ) {
+                $( element ).parents( ".col-md-6" ).addClass( "has-success" ).removeClass( "has-error" );
+                $( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
+            }
+        });
+    }
+
+</script>
+
+<script type="text/javascript">
+
+
+
+</script>
+</body>
+
+</html>

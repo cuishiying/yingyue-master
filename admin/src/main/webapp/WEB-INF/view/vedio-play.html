@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>视频管理</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/linearicons/style.css}">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" th:href="@{/static/assets/css/main.css}">
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <link rel="stylesheet" th:href="@{/static/assets/css/demo.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/datetimepicker/css/jquery.datetimepicker.css}">
+
+    <!-- GOOGLE FONTS -->
+    <!--<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">-->
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/static/assets/img/apple-icon.png}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/static/assets/img/favicon.png}">
+    <style type="text/css">
+        .item-name{
+            display: inline-block;
+            min-width: 100px;
+        }
+
+        .form-inline .item-content{
+            width: 50%;
+        }
+        .form-inline{
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<!-- WRAPPER -->
+<div id="wrapper">
+    <!-- NAVBAR -->
+    <nav th:replace="common/fragment :: navbar"></nav>
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <nav th:replace="common/fragment :: sidebar-nav"></nav>
+    <!-- END LEFT SIDEBAR -->
+    <!-- MAIN -->
+    <div class="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="panel panel-profile">
+                    <div class="clearfix">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">视频播放</h3>
+                            <div class="right">
+                                <button type="button" class="btn-return btn-sm" onclick="javascript:history.go(-1)">返回</button>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <!-- 直播html代码-->
+                            <div id="player" style="width:100%;height:600px;">
+                                <script type="text/javascript" charset="utf-8" src="http://yuntv.letv.com/player/vod/bcloud.js"></script>
+                                <script th:inline="javascript">
+                                    var vedio = /*[[${vedio}]]*/;
+                                    var player = new CloudVodPlayer();
+                                    player.init({uu:vedio.uu,vu:vedio.vu});
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN -->
+    <div class="clearfix"></div>
+    <footer>
+        <div class="container-fluid">
+            <p class="copyright">&copy; 2017 <a href="#" target="_blank">Theme I Need</a>. All Rights Reserved. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+        </div>
+    </footer>
+</div>
+<!-- END WRAPPER -->
+<!-- Javascript -->
+<script th:src="@{/static/assets/vendor/jquery/jquery.js}"></script>
+<script th:src="@{/static/assets/vendor/jquery-form/jquery.form.js}"></script>
+<script th:src="@{/static/assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/static/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/static/assets/scripts/klorofil-common.js}"></script>
+<script th:src="@{/static/assets/vendor/datetimepicker/js/jquery.datetimepicker.full.js}"></script>
+<script th:src="@{/static/assets/utils/httpUtils.js}"></script>
+
+<script type="text/javascript" th:inline="javascript">
+    var ctx = /*[[@{/}]]*/;
+
+
+</script>
+</body>
+
+</html>

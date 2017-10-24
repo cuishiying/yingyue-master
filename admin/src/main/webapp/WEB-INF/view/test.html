@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <form th:action="@{/vedio}" method="get">
+            <div class="controller form-inline">
+                <input type="text" class="form-control date" placeholder="开始时间" name="beginDate" th:value="${queryDTO.beginDate?.toString()}">
+                <input type="text" class="form-control date" placeholder="结束时间" name="endDate" th:value="${queryDTO.endDate?.toString()}">
+                <button type="submit" class="btn btn-primary">搜索</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

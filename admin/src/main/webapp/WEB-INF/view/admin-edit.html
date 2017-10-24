@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Profile | Klorofil - Free Bootstrap Dashboard Template</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/linearicons/style.css}">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" th:href="@{/static/assets/css/main.css}">
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <link rel="stylesheet" th:href="@{/static/assets/css/demo.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/datetimepicker/css/jquery.datetimepicker.css}">
+
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/static/assets/img/apple-icon.png}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/static/assets/img/favicon.png}">
+    <style type="text/css">
+        .item-name{
+            display: inline-block;
+            min-width: 50px;
+        }
+
+        .form-inline .item-content{
+            width: 50%;
+        }
+        .form-inline{
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<!-- WRAPPER -->
+<div id="wrapper">
+    <!-- NAVBAR -->
+    <nav th:replace="common/fragment :: navbar"></nav>
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <nav th:replace="common/fragment :: sidebar-nav"></nav>
+    <!-- END LEFT SIDEBAR -->
+    <!-- MAIN -->
+    <div class="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="panel panel-profile">
+                    <div class="clearfix">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">客户编辑</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-unstyled list-justify">
+                                <li class="form-inline"><label class="item-name">姓名</label> <input class="form-control item-content" id="adminName" th:value="${admin.adminName}"></li>
+                                <li class="form-inline"><label class="item-name">电话</label> <input class="form-control item-content" id="phone" th:value="${admin.phone}"></li>
+                                <li class="form-inline"><label class="item-name">QQ</label> <input class="form-control item-content" id="qqNumber" th:value="${admin.qqNumber}"></li>
+                                <li class="form-inline"><label class="item-name">微信</label> <input class="form-control item-content" id="weixin" th:value="${admin.weixin}"></li>
+                                <li class="form-inline"><label class="item-name">生日</label> <input class="form-control item-content" id="birth" th:value="${admin.birth}"></li>
+                                <li class="form-inline"><label class="item-name">邮箱</label> <input class="form-control item-content" id="email" th:value="${admin.email}"></li>
+                                <li class="form-inline">
+                                    <button type="button" class="btn btn-default close-window" onclick="javascript:history.back(-1);">关闭</button>
+                                    <button type="button" class="btn btn-primary save" onclick="updateAdmin();">保存</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN -->
+    <div class="clearfix"></div>
+    <footer>
+        <div class="container-fluid">
+            <p class="copyright">&copy; 2017 <a href="#" target="_blank">Theme I Need</a>. All Rights Reserved. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+        </div>
+    </footer>
+</div>
+<!-- END WRAPPER -->
+<!-- Javascript -->
+<script th:src="@{/static/assets/vendor/jquery/jquery.js}"></script>
+<script th:src="@{/static/assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/static/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/static/assets/scripts/klorofil-common.js}"></script>
+<script th:src="@{/static/assets/vendor/datetimepicker/js/jquery.datetimepicker.full.js}"></script>
+<script th:src="@{/static/assets/utils/httpUtils.js}"></script>
+
+<script type="text/javascript" th:inline="javascript">
+    var ctx = /*[[@{/}]]*/;
+    var id = /*[[${admin.id}]]*/;
+
+    $('#birth').datetimepicker({
+        lang:"ch", //语言选择中文 注：旧版本 新版方法：$.datetimepicker.setLocale('ch');
+        format:"Y-m-d",      //格式化日期
+        timepicker:false,    //关闭时间选项
+        yearStart:2000,     //设置最小年份
+        yearEnd:2050,        //设置最大年份
+        todayButton:true    //关闭选择今天按钮
+    });
+
+    function updateAdmin() {
+        var admin = {};
+        admin.adminName = $("#adminName").val();
+        admin.phone = $("#phone").val();
+        admin.email = $("#email").val();
+        admin.qqNumber = $("#qqNumber").val();
+        admin.weixin = $("#weixin").val();
+        admin.birth = $("#birth").val();
+        console.log(admin);
+        httpUtils.postJson(ctx + "admin/edit/" + id,admin,function(e){
+            if (e.success) {
+                window.location.href = ctx + "admin";
+            } else {
+            }
+        });
+    }
+</script>
+</body>
+
+</html>

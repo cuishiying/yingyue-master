@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>注册用户</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/linearicons/style.css}">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" th:href="@{/static/assets/css/main.css}">
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <link rel="stylesheet" th:href="@{/static/assets/css/demo.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/datetimepicker/css/jquery.datetimepicker.css}">
+
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/static/assets/img/apple-icon.png}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/static/assets/img/favicon.png}">
+</head>
+
+<body>
+<!-- WRAPPER -->
+<div id="wrapper">
+    <!-- NAVBAR -->
+    <nav th:replace="common/fragment :: navbar"></nav>
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <nav th:replace="common/fragment :: sidebar-nav"></nav>
+    <!-- END LEFT SIDEBAR -->
+    <!-- MAIN -->
+    <div class="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="panel panel-profile">
+                    <div class="clearfix">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">注册用户</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal" id="registForm">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="accountNumber">帐号</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="accountNumber" name="accountNumber" class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="adminName">姓名</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="adminName" name="adminName" class="form-control" placeholder="" rows="7">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="idCard">身份证</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="idCard" name="idCard" class="form-control" placeholder="">
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="phone">手机</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="phone" name="phone" class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="password">请输入密码</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="password" name="password" class="form-control" placeholder="" rows="7">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="rePwd">请确认密码</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="rePwd" name="rePwd" class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="code">请输入验证码</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="code" name="code" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="code_gain flex_wrap midCenter"></div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-8" style="text-align: center">
+                                        <button type="button" class="btn btn-default close-window" onclick="javascript:history.back(-1);">关闭</button>
+                                        <button type="button" class="btn btn-primary save">注册</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN -->
+    <div class="clearfix"></div>
+    <footer>
+        <div class="container-fluid">
+            <p class="copyright">&copy; 2017 <a href="#" target="_blank">Theme I Need</a>. All Rights Reserved. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+        </div>
+    </footer>
+</div>
+<!-- END WRAPPER -->
+<!-- Javascript -->
+<script th:src="@{/static/assets/vendor/jquery/jquery.js}"></script>
+<script th:src="@{/static/assets/vendor/jquery-validation/jquery.validate.min.js}"></script>
+<script th:src="@{/static/assets/vendor/jquery-form/jquery.form.js}"></script>
+<script th:src="@{/static/assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/static/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/static/assets/vendor/countdown-time/time.js}"></script>
+<script th:src="@{/static/assets/scripts/klorofil-common.js}"></script>
+<script th:src="@{/static/assets/vendor/datetimepicker/js/jquery.datetimepicker.full.js}"></script>
+<script th:src="@{/static/assets/utils/httpUtils.js}"></script>
+
+<script type="text/javascript" th:inline="javascript">
+    var ctx = /*[[@{/}]]*/;
+    $(function() {
+        var nameR = $(".code_gain");/*右边按钮class*/
+        nameR.click(sendCode);
+        nameR.html("获取验证码");
+    });
+    function sendCode() {
+        // TODO 发送验证码
+        var phone = $("#phone").val();
+        if (!phone) {
+            alert("请填写手机号");
+            return;
+        }
+        // var reg = /^((13[0-9])|(15[^4,\D])|(18[0,5-9]))\d{8}$/;
+        var reg = /^1\d{10}$/;
+        if (!reg.test(phone)) {
+            alert("手机号格式不正确");
+            return;
+        }
+        var flag = true;
+        $.ajax({
+            url: ctx + "account/sendCode",
+            data: {"phone":phone},
+            type: "post",
+            async: false,
+            success: function(result) {
+                if (!result.success)
+                    alert(result.message);
+                else
+                    flag = false;
+                    alert(result.data);
+            }
+        });
+        if (flag) return;
+        $(".code_gain").unbind("click");
+        $(".code_gain").SMS_Verification({
+            nameL: $(".code"),/*输入框class*/
+            time_overplus:60,/*倒计时时间多少秒*/
+            innerfont: "获取验证码",/*右边按钮初始内容*/
+            ifPass:1,/*验证结果，控制右边按钮是否可以点击*/
+            sendM:function(){/*倒计时结束后执行的代码在这里填,如果不想要，函数为空即可*/
+                console.log('倒计时结束喽~');
+                $(".code_gain").bind("click", sendCode);
+            }
+        });
+    }
+
+</script>
+
+<script type="text/javascript" th:inline="javascript">
+    var ctx = /*[[@{/}]]*/;
+    var check;
+
+    $(".save").bind("click", function() {
+        var emp = new Object();
+        emp.accountNumber = $("#accountNumber").val();
+        emp.adminName = $("#adminName").val();
+        emp.idCard = $("#idCard").val();
+        emp.phone = $("#phone").val();
+        emp.password = $("#password").val();
+        if (!check.form()) return;
+        $.ajax({
+            url: ctx + "account/regist?code=" + code,
+            data: JSON.stringify(emp),
+            type: "post",
+            contentType: "application/json;charset=utf-8",
+            success: function(result) {
+                if (result.success) {
+                    alert("注册成功！");
+                    window.location.href = ctx + "to_login";
+                }
+                else
+                    alert(result.message);
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        check = validateContent();
+    })
+    function validateContent(){
+        return $("#registForm").validate({
+            rules: {
+                accountNumber:{
+                    required:true,
+                    minlength:6
+                },
+                adminName:"required",
+                idCard:{
+                    required:true,
+                    minlength:18,
+                    maxlength:18
+                },
+                phone:{
+                    required:true,
+                    minlength:11,
+                    maxlength:11
+                },
+                password:{
+                    required:true,
+                    rangelength:[5,20]
+                },
+                rePwd:{
+                    required:true,
+                    rangelength:[5,20],
+                    equalTo: "#password"
+                },
+                code:"required",
+            },
+            messages: {
+                accountNumber:{
+                    required: "请输入帐号",
+                    minlength: "至少6个字符"
+                },
+                adminName:"请输入姓名",
+                idCard:{
+                    required: "请输入身份证号",
+                    minlength: "身份证为18位",
+                    maxlength: "身份证为18位",
+                },
+                phone:{
+                    required: "请输入手机号",
+                    minlength: "手机号为11位数字",
+                    maxlength: "手机号为11位数字",
+                },
+                password:{
+                    required: "请输入密码",
+                    rangelength: "密码长度为5-20位"
+                },
+                rePwd:{
+                    required: "请确认密码",
+                    rangelength: "密码长度为5-20位",
+                    equalTo: "两次密码不一致"
+                },
+                code:"请输入验证码",
+            },
+            errorElement: "em",
+            errorPlacement: function ( error, element ) {
+                // Add the `help-block` class to the error element
+                error.addClass( "help-block" );
+
+                // Add `has-feedback` class to the parent div.form-group
+                // in order to add icons to inputs
+                element.parents( ".col-md-6" ).addClass( "has-feedback" );
+
+                if ( element.prop( "type" ) === "checkbox" ) {
+                    error.insertAfter( element.parent( "label" ) );
+                } else {
+                    error.insertAfter( element );
+                }
+
+                // Add the span element, if doesn't exists, and apply the icon classes to it.
+                if ( !element.next( "span" )[ 0 ] ) {
+                    $( "<span class='glyphicon glyphicon-remove form-control-feedback'></span>" ).insertAfter( element );
+                }
+            },
+            success: function ( label, element ) {
+                // Add the span element, if doesn't exists, and apply the icon classes to it.
+                if ( !$( element ).next( "span" )[ 0 ] ) {
+                    $( "<span class='glyphicon glyphicon-ok form-control-feedback'></span>" ).insertAfter( $( element ) );
+                }
+            },
+            highlight: function ( element, errorClass, validClass ) {
+                $( element ).parents( ".col-md-6" ).addClass( "has-error" ).removeClass( "has-success" );
+                $( element ).next( "span" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
+            },
+            unhighlight: function ( element, errorClass, validClass ) {
+                $( element ).parents( ".col-md-6" ).addClass( "has-success" ).removeClass( "has-error" );
+                $( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
+            }
+        });
+    }
+
+</script>
+</body>
+
+</html>

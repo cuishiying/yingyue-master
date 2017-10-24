@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>视频管理</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/linearicons/style.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/dropzone/dropzone.css}">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" th:href="@{/static/assets/css/main.css}">
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <link rel="stylesheet" th:href="@{/static/assets/css/demo.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/datetimepicker/css/jquery.datetimepicker.css}">
+
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/static/assets/img/apple-icon.png}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/static/assets/img/favicon.png}">
+</head>
+
+<body>
+<!-- WRAPPER -->
+<div id="wrapper">
+    <!-- NAVBAR -->
+    <nav th:replace="common/fragment :: navbar"></nav>
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <nav th:replace="common/fragment :: sidebar-nav"></nav>
+    <!-- END LEFT SIDEBAR -->
+    <!-- MAIN -->
+    <div class="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="panel panel-profile">
+                    <div class="clearfix">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">添加视频</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal" id="vedioForm">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="name">标题</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="name" name="name" class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="intro">简介</label>
+                                    <div class="col-md-6">
+                                        <textarea type="text" id="intro" name="intro" class="form-control" placeholder="" rows="7"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="url">URL</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="url" name="url" class="form-control" placeholder="">
+                                        <a href="http://yuntv.letv.com/bcloud.html?uu=qoppwiltlq&vu=0c3870ca45&auto_play=1&width=640&height=360&lang=zh_CN" target="_blank">示例链接</a>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">海报</label>
+                                    <div class="col-md-6">
+                                        <div class="dropzone img-content poster" id="myDropzone">
+                                            <div class="am-text-success dz-message">
+                                                <img src="" class="poster-img" style="display: none">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-8" style="text-align: center">
+                                        <button type="button" class="btn btn-default close-window" onclick="javascript:history.back(-1);">关闭</button>
+                                        <button type="button" class="btn btn-primary save">保存</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN -->
+    <div class="clearfix"></div>
+    <footer>
+        <div class="container-fluid">
+            <!--<p class="copyright">&copy; 2017 <a href="#" target="_blank">Theme I Need</a>. All Rights Reserved. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>-->
+        </div>
+    </footer>
+</div>
+<!-- END WRAPPER -->
+<!-- Javascript -->
+<script th:src="@{/static/assets/vendor/jquery/jquery.js}"></script>
+<script th:src="@{/static/assets/vendor/jquery-validation/jquery.validate.min.js}"></script>
+<script th:src="@{/static/assets/vendor/jquery-form/jquery.form.js}"></script>
+<script th:src="@{/static/assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/static/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/static/assets/scripts/klorofil-common.js}"></script>
+<script th:src="@{/static/assets/vendor/dropzone/dropzone.min.js}"></script>
+<script th:src="@{/static/assets/vendor/datetimepicker/js/jquery.datetimepicker.full.js}"></script>
+<script th:src="@{/static/assets/utils/httpUtils.js}"></script>
+
+<script type="text/javascript" th:inline="javascript">
+    var ctx = /*[[@{/}]]*/;
+    var check;
+
+    Dropzone.autoDiscover = false;
+    $(".img-content").dropzone({
+        url: ctx+"upload/uploadImg",
+        maxFiles: 10,
+        maxFilesize: 512,
+        init:function () {
+            this.on("success",function (file, res) {
+                $(".poster-img").attr("src",res.data);
+            });
+        }
+    });
+
+    $(".save").click(function (e) {
+        var vedio = {};
+        vedio.name = $("#name").val();
+        vedio.intro = $("#intro").val();
+        vedio.url = $("#url").val();
+        vedio.imageUrl = $(".poster-img").attr("src");
+        if (!check.form()) return;
+        if(!vedio.imageUrl){
+            alert("请上传海报");
+            return;
+        }
+        httpUtils.postJson(ctx + "vedio/add",vedio,function(e){
+            if (e.success) {
+                console.log(e)
+                window.location.href = ctx + "vedio";
+            } else {
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        check = validateContent();
+    });
+
+    function validateContent(){
+        return $("#vedioForm").validate({
+            rules: {
+                name:"required",
+                intro:{
+                    required:true,
+                    minlength:6
+                },
+                url:"required",
+                imageUrl:"required"
+            },
+            messages: {
+                name:"请输入标题",
+                intro:{
+                    required: "请输入简介",
+                    minlength: "至少6个字符"
+                },
+                url:"请输入URL",
+                imageUrl:"请上传海报"
+            },
+            errorElement: "em",
+            errorPlacement: function ( error, element ) {
+                // Add the `help-block` class to the error element
+                error.addClass( "help-block" );
+
+                // Add `has-feedback` class to the parent div.form-group
+                // in order to add icons to inputs
+                element.parents( ".col-md-6" ).addClass( "has-feedback" );
+
+                if ( element.prop( "type" ) === "checkbox" ) {
+                    error.insertAfter( element.parent( "label" ) );
+                } else {
+                    error.insertAfter( element );
+                }
+
+                // Add the span element, if doesn't exists, and apply the icon classes to it.
+                if ( !element.next( "span" )[ 0 ] ) {
+                    $( "<span class='glyphicon glyphicon-remove form-control-feedback'></span>" ).insertAfter( element );
+                }
+            },
+            success: function ( label, element ) {
+                // Add the span element, if doesn't exists, and apply the icon classes to it.
+                if ( !$( element ).next( "span" )[ 0 ] ) {
+                    $( "<span class='glyphicon glyphicon-ok form-control-feedback'></span>" ).insertAfter( $( element ) );
+                }
+            },
+            highlight: function ( element, errorClass, validClass ) {
+                $( element ).parents( ".col-md-6" ).addClass( "has-error" ).removeClass( "has-success" );
+                $( element ).next( "span" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
+            },
+            unhighlight: function ( element, errorClass, validClass ) {
+                $( element ).parents( ".col-md-6" ).addClass( "has-success" ).removeClass( "has-error" );
+                $( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
+            }
+        });
+    }
+
+</script>
+</body>
+
+</html>
