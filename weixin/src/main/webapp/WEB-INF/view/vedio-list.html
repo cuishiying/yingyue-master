@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://m.pintu360.com/video.html -->
+<html lang="en" style="font-size: 55.2px;"  xmlns:th="http://www.thymeleaf.org">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>【视频】</title>
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/vedio/css/vedio.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/dropload-gh-pages/dist/dropload.css}">
+</head>
+<body>
+<header>
+    <div class="g-header flex_box row_space_between cross_center">
+        <div class="g-search">
+            <img th:src="@{/static/assets/vendor/vedio/image/search.png}" class="search-logo" alt="">
+        </div>
+        <div class="flex_box">
+            <a href="http://m.baidu.com" class="logo"></a>
+            <!-- <span class="title" id="index_title"></span>-->
+        </div>
+        <div class="user">
+            <a href="" id="login_and_register" class="login_user" style="">
+                <img th:src="@{/static/assets/vendor/vedio/image/user.png}" alt="" class="login">
+            </a>
+            <a href="" class="user-head client_head_img" style="background-image: url(./static/assets/vendor/vedio/image/avatar_anonymous.png);display: none;">
+                <div class="red_circle"></div>
+            </a>
+        </div>
+    </div>
+</header>
+<!--搜索弹框-->
+<div class="search-empty-wrap" style="height: 736px;">
+    <div class="search-top flex_box cross_center row_space_between">
+        <form action="http://m.pintu360.com/search.php" method="get" class="search-form flex_box cross_center">
+            <input type="text" name="k" id="keyword" placeholder="搜索">
+            <img class="search" onclick="search()" th:src="@{/static/assets/vendor/vedio/image/search.png}">
+        </form>
+        <div class="cancel">取消</div>
+    </div>
+</div>
+<!--左侧菜单-->
+
+
+<div class="content">
+    <div class="video-wrap" id="video_list">
+        <a href="http://m.pintu360.com/v55.html" class="video-list">
+            <div class="v-pic-title">
+                <div class="pic" style="background-image: url(http://img.pintu360.com/pintuplusVideo/4dc75141-1274-4a48-988d-c34630961d2b.jpg?x-oss-process=style/m-video-list)"></div>
+                <div class="mask">
+                    <div class="title">全时贾岩：不仅是一只猫，全时便利店要打破IP边界</div>
+                    <span class="play"></span>
+                </div>
+            </div>
+            <div class="desc flex_box cross_center">
+                <span>李兴雨</span>
+                <span>2017-10-27 18:10</span>
+            </div>
+        </a>
+        <a href="http://m.pintu360.com/v54.html" class="video-list">
+            <div class="v-pic-title">
+                <div class="pic" style="background-image: url(&#39;http://img.pintu360.com/pintuplusVideo/d743d854-da53-4ca4-8dbe-a6f6e0fdf15e.jpg?x-oss-process=style/m-video-list&#39;)"></div>
+                <div class="mask">
+                    <div class="title">燕达医院李海玲：民营、公立握手言“合”，办医就该治病救人</div>
+                    <span class="play"></span>
+                </div>
+            </div>
+            <div class="desc flex_box cross_center">
+                <span>杨亚茹</span>
+                <span>2017-10-27 18:05</span>
+            </div>
+        </a>
+        <a href="http://m.pintu360.com/v53.html" class="video-list">
+            <div class="v-pic-title">
+                <div class="pic" style="background-image: url(&#39;http://img.pintu360.com/pintuplusVideo/e804a15e-22b5-49dd-b923-7479e4235ba3.jpg?x-oss-process=style/m-video-list&#39;)"></div>
+                <div class="mask">
+                    <div class="title">妙健康孔飞：全民意识觉醒之前，健康管理已经成为企业刚需</div>
+                    <span class="play"></span>
+                </div>
+            </div>
+            <div class="desc flex_box cross_center">
+                <span>杨亚茹</span>
+                <span>2017-10-16 16:27</span>
+            </div>
+        </a>
+        <a href="http://m.pintu360.com/v52.html" class="video-list">
+            <div class="v-pic-title">
+                <div class="pic" style="background-image: url(&#39;http://img.pintu360.com/pintuplusVideo/bebb7720-5592-463e-a72e-83974aa0bae4.jpg?x-oss-process=style/m-video-list&#39;)"></div>
+                <div class="mask">
+                    <div class="title">巨石达阵董宇：五年摸索，让国内五千高净值人群为美式橄榄球买单</div>
+                    <span class="play"></span>
+                </div>
+            </div>
+            <div class="desc flex_box cross_center">
+                <span>王露</span>
+                <span>2017-09-30 14:20</span>
+            </div>
+        </a>
+        <a href="http://m.pintu360.com/v51.html" class="video-list">
+            <div class="v-pic-title">
+                <div class="pic" style="background-image: url(&#39;http://img.pintu360.com/pintuplusVideo/b582f3df-52b9-4967-91b7-632396a8b99d.png?x-oss-process=style/m-video-list&#39;)"></div>
+                <div class="mask">
+                    <div class="title">3家百亿级公司缔造者：我创业是为了追求自由</div>
+                    <span class="play"></span>
+                </div>
+            </div>
+            <div class="desc flex_box cross_center">
+                <span>李玉梅</span>
+                <span>2017-09-28 15:01</span>
+            </div>
+        </a>
+        <a href="http://m.pintu360.com/v44.html" class="video-list">
+            <div class="v-pic-title">
+                <div class="pic" style="background-image: url(&#39;http://img.pintu360.com/pintuplusVideo/c57c2f7c-57e7-4076-a71b-18e7b478a963.png?x-oss-process=style/m-video-list&#39;)"></div>
+                <div class="mask">
+                    <div class="title">现实版曲筱绡：因聚众打架、抽烟被学校开除，现开公司年入上亿元</div>
+                    <span class="play"></span>
+                </div>
+            </div>
+            <div class="desc flex_box cross_center">
+                <span>李玉梅</span>
+                <span>2017-09-28 09:56</span>
+            </div>
+        </a>
+        <a href="http://m.pintu360.com/v50.html" class="video-list">
+            <div class="v-pic-title">
+                <div class="pic" style="background-image: url(&#39;http://img.pintu360.com/pintuplusVideo/7e3f9233-d3a4-4fdf-8346-b8526fb700d6.jpg?x-oss-process=style/m-video-list&#39;)"></div>
+                <div class="mask">
+                    <div class="title">孔医堂孔令谦：中医药长远发展须走文化输出之路</div>
+                    <span class="play"></span>
+                </div>
+            </div>
+            <div class="desc flex_box cross_center">
+                <span>四百味</span>
+                <span>2017-09-25 13:55</span>
+            </div>
+        </a>
+        <a href="http://m.pintu360.com/v49.html" class="video-list">
+            <div class="v-pic-title">
+                <div class="pic" style="background-image: url(&#39;http://img.pintu360.com/pintuplusVideo/2f365631-22ab-4f5a-a75f-881b553836e3.png?x-oss-process=style/m-video-list&#39;)"></div>
+                <div class="mask">
+                    <div class="title">华熙生物金雪坤：医药级技术下嫁护肤品，打造国际化巨企独辟蹊径</div>
+                    <span class="play"></span>
+                </div>
+            </div>
+            <div class="desc flex_box cross_center">
+                <span>Shirley</span>
+                <span>2017-09-23 13:48</span>
+            </div>
+        </a>
+        <a href="http://m.pintu360.com/v48.html" class="video-list">
+            <div class="v-pic-title">
+                <div class="pic" style="background-image: url(&#39;http://img.pintu360.com/pintuplusVideo/5dd2c564-5368-4caf-bc19-aceea2750109.jpg?x-oss-process=style/m-video-list&#39;)"></div>
+                <div class="mask">
+                    <div class="title">新意畅想赫伦：四年前的药企青睐数据，现在又开始下沉社区医院</div>
+                    <span class="play"></span>
+                </div>
+            </div>
+            <div class="desc flex_box cross_center">
+                <span>杨亚茹 李兴雨</span>
+                <span>2017-09-19 14:06</span>
+            </div>
+        </a>
+        <a href="http://m.pintu360.com/v47.html" class="video-list">
+            <div class="v-pic-title">
+                <div class="pic" style="background-image: url(&#39;http://img.pintu360.com/pintuplusVideo/1feb8efa-049b-4826-aea8-593eae23f431.png?x-oss-process=style/m-video-list&#39;)"></div>
+                <div class="mask">
+                    <div class="title">慧致天诚 许颖：资本寒冬是一种相对论，实力雄厚才不怕冷</div>
+                    <span class="play"></span>
+                </div>
+            </div>
+            <div class="desc flex_box cross_center">
+                <span>李兴雨</span>
+                <span>2017-09-11 12:45</span>
+            </div>
+        </a>
+        <a href="http://m.pintu360.com/v46.html" class="video-list">
+            <div class="v-pic-title">
+                <div class="pic" style="background-image: url(&#39;http://img.pintu360.com/pintuplusVideo/6d7605b0-c8a4-435f-bc18-b23503e054e3.jpg?x-oss-process=style/m-video-list&#39;)"></div>
+                <div class="mask">
+                    <div class="title">彭晶辉：打造媒体+培训+母基金矩阵，关键点是经营核心圈子</div>
+                    <span class="play"></span>
+                </div>
+            </div>
+            <div class="desc flex_box cross_center">
+                <span>苑晶，李兴雨</span>
+                <span>2017-09-04 18:30</span>
+            </div>
+        </a>
+        <a href="http://m.pintu360.com/v45.html" class="video-list">
+            <div class="v-pic-title">
+                <div class="pic" style="background-image: url(&#39;http://img.pintu360.com/pintuplusVideo/23fd0dde-d77d-4202-b571-7fbadd2ba909.jpg?x-oss-process=style/m-video-list&#39;)"></div>
+                <div class="mask">
+                    <div class="title">蚁视覃政：做产品的跑去开店，VR的商业模式还有哪些可能？</div>
+                    <span class="play"></span>
+                </div>
+            </div>
+            <div class="desc flex_box cross_center">
+                <span>李兴雨</span>
+                <span>2017-08-31 14:59</span>
+            </div>
+        </a>
+        <a href="http://m.pintu360.com/v43.html" class="video-list">
+            <div class="v-pic-title">
+                <div class="pic" style="background-image: url(&#39;http://img.pintu360.com/pintuplusVideo/7d154e3b-1c02-41c7-ac15-a184481576bc.jpg?x-oss-process=style/m-video-list&#39;)"></div>
+                <div class="mask">
+                    <div class="title">禾中集团 · 王汝颜：医药投资的三个驱动</div>
+                    <span class="play"></span>
+                </div>
+            </div>
+            <div class="desc flex_box cross_center">
+                <span>李兴雨</span>
+                <span>2017-08-29 14:01</span>
+            </div>
+        </a>
+        <a href="http://m.pintu360.com/v42.html" class="video-list">
+            <div class="v-pic-title">
+                <div class="pic" style="background-image: url(&#39;http://img.pintu360.com/pintuplusVideo/1209568b-e4a7-4e3d-ac2b-93abeea46833.png?x-oss-process=style/m-video-list&#39;)"></div>
+                <div class="mask">
+                    <div class="title">阳光「创业 」灿烂「凶猛 」的日子</div>
+                    <span class="play"></span>
+                </div>
+            </div>
+            <div class="desc flex_box cross_center">
+                <span>方星月</span>
+                <span>2017-08-28 13:02</span>
+            </div>
+        </a>
+        <a href="http://m.pintu360.com/v41.html" class="video-list">
+            <div class="v-pic-title">
+                <div class="pic" style="background-image: url(&#39;http://img.pintu360.com/pintuplusVideo/465256f1-4150-4721-a7ea-dd8ec9055cfa.png?x-oss-process=style/m-video-list&#39;)"></div>
+                <div class="mask">
+                    <div class="title">十方麟玺 · 陈雪涛：雷神游戏笔记本崛起表象下，剧烈商业变化</div>
+                    <span class="play"></span>
+                </div>
+            </div>
+            <div class="desc flex_box cross_center">
+                <span>李兴雨</span>
+                <span>2017-08-24 15:08</span>
+            </div>
+        </a>
+    </div>
+</div>
+
+<script th:src="@{/static/assets/vendor/jquery/jquery.js}"></script>
+<script th:src="@{/static/assets/utils/httpUtils.js}"></script>
+<script th:src="@{/static/assets/vendor/dropload-gh-pages/dist/dropload.min.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+    var ctx = /*[[@{/}]]*/;
+    var page = /*[[${page}]]*/;
+    // 页数
+    var pageNumber = 0;
+    // 每页展示10个
+    var pageSize = 10;
+
+    $(function(){
+
+        $('.content').dropload({
+            scrollArea : window,
+            loadDownFn : function(me){
+                pageNumber++;
+                var result = '';
+                httpUtils.getData(ctx+"vedio/list/data?page="+pageNumber+"&size="+pageSize,function (e) {
+//                    console.log(e);
+                    if(e.success){
+                        var currentSize = e.numberOfElements;
+                        if(currentSize>0){
+                            for(var i=0; i<currentSize; i++){
+                                result +=   '<a href="http://m.pintu360.com/v40.html" class="video-list">'
+                                    +'<div class="v-pic-title"><div class="pic" style="background-image: url(&#39;http://img.pintu360.com/pintuplusVideo/465256f1-4150-4721-a7ea-dd8ec9055cfa.png?x-oss-process=style/m-video-list&#39;)">'
+                                    +'</div>'
+                                    +'<div class="mask">'
+                                    +'<div class="title">约印医疗基金 · 郑玉芬：民营医院发展将迎来「黄金十年」</div>'
+                                    +'<span class="play"></span>'
+                                    +'</div>'
+                                    +'</div>'
+                                    +'<div class="desc flex_box cross_center">'
+                                    +'<span>李兴雨</span>'
+                                    +'<span>2017-08-24 13:28</span>'
+                                    +'</div>';
+                            }
+                        // 如果没有数据
+                        }else{
+                            // 锁定
+                            me.lock();
+                            // 无数据
+                            me.noData();
+                        }
+                        // 插入数据到页面，放到最后面
+                        $('.video-wrap').append(result);
+                        // 每次数据插入，必须重置
+                        me.resetload();
+                    }else{
+                        // 即使加载出错，也得重置
+                        me.resetload();
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
