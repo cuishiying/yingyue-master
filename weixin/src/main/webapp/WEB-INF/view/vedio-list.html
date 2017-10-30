@@ -260,22 +260,22 @@
                 pageNumber++;
                 var result = '';
                 httpUtils.getData(ctx+"vedio/list/data?page="+pageNumber+"&size="+pageSize,function (e) {
-//                    console.log(e);
+                    console.log(e);
                     if(e.success){
-                        var currentSize = e.numberOfElements;
+                        var currentSize = e.data.numberOfElements;
                         if(currentSize>0){
                             for(var i=0; i<currentSize; i++){
                                 result +=   '<a href="http://m.pintu360.com/v40.html" class="video-list">'
-                                    +'<div class="v-pic-title"><div class="pic" style="background-image: url(&#39;http://img.pintu360.com/pintuplusVideo/465256f1-4150-4721-a7ea-dd8ec9055cfa.png?x-oss-process=style/m-video-list&#39;)">'
+                                    +'<div class="v-pic-title"><div class="pic" style="background-image: url(&#39;'+e.data.content[i].imageUrl+'&#39;)">'
                                     +'</div>'
                                     +'<div class="mask">'
-                                    +'<div class="title">约印医疗基金 · 郑玉芬：民营医院发展将迎来「黄金十年」</div>'
+                                    +'<div class="title">'+e.data.content[i].name+'</div>'
                                     +'<span class="play"></span>'
                                     +'</div>'
                                     +'</div>'
                                     +'<div class="desc flex_box cross_center">'
                                     +'<span>李兴雨</span>'
-                                    +'<span>2017-08-24 13:28</span>'
+                                    +'<span>'+e.data.content[i].createTime+'</span>'
                                     +'</div>';
                             }
                         // 如果没有数据
