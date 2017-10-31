@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://m.pintu360.com/video.html -->
+<html lang="en" style="font-size: 55.2px;"  xmlns:th="http://www.thymeleaf.org">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>【视频】</title>
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/vedio/css/vedio.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/vendor/dropload-gh-pages/dist/dropload.css}">
+</head>
+<body>
+<header>
+    <div class="g-header flex_box row_space_between cross_center">
+        <div class="g-search">
+            <img th:src="@{/static/assets/vendor/vedio/image/search.png}" class="search-logo" alt="">
+        </div>
+        <div class="flex_box">
+            <a href="http://m.baidu.com" class="logo"></a>
+            <!-- <span class="title" id="index_title"></span>-->
+        </div>
+        <div class="user">
+            <a href="" id="login_and_register" class="login_user" style="">
+                <img th:src="@{/static/assets/vendor/vedio/image/user.png}" alt="" class="login">
+            </a>
+            <a href="" class="user-head client_head_img" style="background-image: url(./../../static/assets/vendor/vedio/image/avatar_anonymous.png);display: none;">
+                <div class="red_circle"></div>
+            </a>
+        </div>
+    </div>
+</header>
+<!--搜索弹框-->
+<div class="search-empty-wrap" style="height: 736px;">
+    <div class="search-top flex_box cross_center row_space_between">
+        <form action="http://m.pintu360.com/search.php" method="get" class="search-form flex_box cross_center">
+            <input type="text" name="k" id="keyword" placeholder="搜索">
+            <img class="search" onclick="search()" th:src="@{/static/assets/vendor/vedio/image/search.png}">
+        </form>
+        <div class="cancel">取消</div>
+    </div>
+</div>
+<!--左侧菜单-->
+
+<div class="detail-wrap">
+    <div class="detail-content">
+        <div class="video-play" id="video_player">
+            <script type="text/javascript" charset="utf-8" src="http://yuntv.letv.com/player/vod/bcloud.js"></script>
+            <script id="autoJs0c3870ca45" type="text/javascript" th:inline="javascript">
+
+                var vedio = /*[[${vedio}]]*/;
+
+                var pNode=document.getElementById("autoJs0c3870ca45").parentNode,
+                    pt,
+                    pb,
+                    dWidth = pNode.clientWidth,
+                    pHeight = pNode.clientHeight,
+                    dHeight = ReCallHeight(pHeight, dWidth,pNode);
+                function ReCallHeight(h, w,a) {
+                    try{
+                        pt = window.getComputedStyle(a,null).paddingTop;
+                        pb = window.getComputedStyle(a,null).paddingBottom;
+                    }catch(e){
+                        pt = a.currentStyle.paddingTop;
+                        pb = a.currentStyle.paddingBottom;
+                    }
+                    h = h- parseInt(pt)- parseInt(pb);
+                    if(h && (typeof h == "number") && h==h && h>0){
+                        return h;
+                    }else{
+                        var ua = navigator.userAgent.toLowerCase();
+                        var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+                            isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+                            isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+                            isMobile = isIphone || isAndroid;
+                        if(isMobile){
+                            return w*9/16;
+                        }else{
+                            return (w*9/16)+36;
+                        }
+                    }
+                };
+                var player = new CloudVodPlayer();
+                player.init({
+                    "uu":vedio.uu,
+                    "vu":vedio.vu,
+                    "auto_play":1,
+                    "gpcflag":1,
+                    "width":dWidth,
+                    "height":dHeight,
+                    "lang":"zh_CN"
+                });
+            </script>
+        </div>
+        <div class="content">
+            <div class="title" th:text="${vedio.name}">全时贾岩：不仅是一只猫，全时便利店要打破IP边界</div>
+            <div class="info flex_box row_space_between cross_center">
+                <div class="flex_box row_wrap_box cross_center">
+                    <div class="user flex_box cross_center">
+                        <div class="user-head" style="background-image: url(&#39;http://img.pintu360.com/pintuplusVideo/4dc75141-1274-4a48-988d-c34630961d2b.jpg&#39;)"></div>
+                        <div class="article-author">李兴雨</div>
+                    </div>
+                    <div class="classify">影约</div>
+                </div>
+                <div class="article-date" th:text="${#temporals.format(vedio.createTime,'yyyy-MM-dd HH:mm')}">2017-10-27 18:10</div>
+            </div>
+            <div class="article-note">
+                <p th:text="${vedio.intro}">如你所知，全时便利店的全力猫已经一岁了，全力猫的故事才刚刚开始，全时便利店似乎赋予这个将要陪伴全时便利店及用户一起成长的IP更多的价值和内涵。</p>
+            </div>
+            <div class="article-text">
+                <div class="mixin-article">
+                    <div class="text">
+                        <p>
+                            我是测试内容
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/static/assets/vendor/jquery/jquery.js}"></script>
+<script th:src="@{/static/assets/utils/httpUtils.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+    var ctx = /*[[@{/}]]*/;
+</script>
+
+</body>
+</html>

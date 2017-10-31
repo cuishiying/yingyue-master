@@ -22,7 +22,7 @@
             <a href="" id="login_and_register" class="login_user" style="">
                 <img th:src="@{/static/assets/vendor/vedio/image/user.png}" alt="" class="login">
             </a>
-            <a href="" class="user-head client_head_img" style="background-image: url(./static/assets/vendor/vedio/image/avatar_anonymous.png);display: none;">
+            <a href="" class="user-head client_head_img" style="background-image: url(./../static/assets/vendor/vedio/image/avatar_anonymous.png);display: none;">
                 <div class="red_circle"></div>
             </a>
         </div>
@@ -43,7 +43,7 @@
 
 <div class="content">
     <div class="video-wrap" id="video_list">
-        <a href="http://m.pintu360.com/v55.html" class="video-list">
+        <a th:href="@{/vedio/detail/7}" class="video-list">
             <div class="v-pic-title">
                 <div class="pic" style="background-image: url(http://img.pintu360.com/pintuplusVideo/4dc75141-1274-4a48-988d-c34630961d2b.jpg?x-oss-process=style/m-video-list)"></div>
                 <div class="mask">
@@ -265,7 +265,7 @@
                         var currentSize = e.data.numberOfElements;
                         if(currentSize>0){
                             for(var i=0; i<currentSize; i++){
-                                result +=   '<a href="http://m.pintu360.com/v40.html" class="video-list">'
+                                result +=   '<a href="'+ctx+"vedio/detail/"+e.data.content[i].id+'" class="video-list">'
                                     +'<div class="v-pic-title"><div class="pic" style="background-image: url(&#39;'+e.data.content[i].imageUrl+'&#39;)">'
                                     +'</div>'
                                     +'<div class="mask">'
