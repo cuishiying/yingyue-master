@@ -23,6 +23,7 @@
 		http://www.springframework.org/schema/util/spring-util.xsd" default-lazy-init="true">
 	<context:component-scan base-package="com.future.yingyue"/>
 	<context:property-placeholder location="classpath:jdbc.properties"/>
+
 	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driver}"/>
 		<property name="url" value="${jdbc.url}"/>
@@ -33,7 +34,21 @@
 		<property name="minIdle" value="${jdbc.pool.minIdle}" />
 		<property name="maxIdle" value="${jdbc.pool.maxIdle}" />
 		<property name="maxWait" value="${jdbc.pool.maxWait}" />
+
+		<property name="removeAbandoned" value="true"/>  <!-- 是否自动回收超时连接-->
+		<property name="removeAbandonedTimeout" value="600" /><!--  泄露的连接可以被删除的超时值， 单位秒应设置为应用中查询执行最长的时间,单位为秒 -->
+		<property name="validationInterval" value="60000"/>  <!--检查连接死活的时间间隔（单位：毫妙） 0以下的话不检查。默认是0。 -->
+		<property name="validationQuery"><value>SELECT 1</value></property>
+		<property name="testOnBorrow"><value>true</value></property>
+		<property name="testOnReturn"><value>true</value></property>
+		<property name="testWhileIdle"><value>true</value></property>  <!-- 验证失败时，是否将连接从池中丢弃 -->
 	</bean>
+
+	<!-- 配置Jdbc模板 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
 		<property name="packagesToScan" value="com.future.yingyue.entity, com.future.yingyue.converter"/>
@@ -51,6 +66,7 @@
 			</props>
 		</property>
 	</bean>
+
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory"/>
 	</bean>

@@ -152,6 +152,7 @@ public class AdminService {
             admin.setWeixin(updateAdmin.getWeixin());
             admin.setEmail(updateAdmin.getEmail());
             admin.setBirth(updateAdmin.getBirth());
+            admin.setHeadImg(updateAdmin.getHeadImg());
             return AjaxResponse.success("修改成功");
         }catch (Exception e){
             e.printStackTrace();

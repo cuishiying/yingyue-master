@@ -8,6 +8,8 @@ public class VedioQueryDTO {
 
     private String keyword;
 
+    private Boolean online;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate beginDate;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -19,6 +21,14 @@ public class VedioQueryDTO {
 
     public void setKeyword(String keyword) {
         this.keyword = keyword;
+    }
+
+    public Boolean getOnline() {
+        return online;
+    }
+
+    public void setOnline(Boolean online) {
+        this.online = online;
     }
 
     public LocalDate getBeginDate() {

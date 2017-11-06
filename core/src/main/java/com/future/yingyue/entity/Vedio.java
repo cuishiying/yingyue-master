@@ -3,7 +3,10 @@ package com.future.yingyue.entity;
 
 import com.future.yingyue.base.BaseEntity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 /**
@@ -26,6 +29,8 @@ public class Vedio extends BaseEntity {
     private String uu;
     private String vu;
     private boolean online;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private Admin createdAdmin; // 创建人
 
     public String getName() {
         return name;
@@ -129,5 +134,13 @@ public class Vedio extends BaseEntity {
 
     public void setOnline(boolean online) {
         this.online = online;
+    }
+
+    public Admin getCreatedAdmin() {
+        return createdAdmin;
+    }
+
+    public void setCreatedAdmin(Admin createdAdmin) {
+        this.createdAdmin = createdAdmin;
     }
 }

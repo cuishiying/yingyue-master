@@ -7,9 +7,12 @@ import com.future.yingyue.service.VedioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -27,7 +30,7 @@ public class VedioController {
      * @return
      */
     @RequestMapping
-    public ModelAndView vedioListView(VedioQueryDTO vedioQueryDTO, @PageableDefault Pageable pageable){
+    public ModelAndView vedioListView(VedioQueryDTO vedioQueryDTO, @PageableDefault(value = 10,sort = "lastUpdateTime",direction = Sort.Direction.DESC) Pageable pageable){
         ModelAndView model = new ModelAndView("vedio-list");
         Page<Vedio> page = vedioService.findAll(vedioQueryDTO,pageable);
         model.addObject("page",page);
@@ -50,8 +53,8 @@ public class VedioController {
      * @return
      */
     @RequestMapping(path = "/add",method = RequestMethod.POST)
-    public AjaxResponse addVedio(@RequestBody Vedio vidio){
-        AjaxResponse ajaxResponse = vedioService.addVedio(vidio);
+    public AjaxResponse addVedio(@RequestBody Vedio vidio, HttpServletRequest request){
+        AjaxResponse ajaxResponse = vedioService.addVedio(vidio,request);
         return ajaxResponse;
     }
 

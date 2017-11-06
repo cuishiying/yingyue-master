@@ -8,6 +8,7 @@ import com.future.yingyue.service.VedioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,9 +28,11 @@ public class VedioController {
      * @return
      */
     @RequestMapping
-    public ModelAndView vedioListView(@PageableDefault Pageable pageable){
+    public ModelAndView vedioListView(@PageableDefault(value = 10,sort = "lastUpdateTime",direction = Sort.Direction.DESC) Pageable pageable){
         ModelAndView model = new ModelAndView("vedio-list");
-        Page<Vedio> page = vedioService.findAll(null,pageable);
+        VedioQueryDTO vedioQueryDTO = new VedioQueryDTO();
+        vedioQueryDTO.setOnline(true);
+        Page<Vedio> page = vedioService.findAll(vedioQueryDTO,pageable);
         model.addObject("page",page);
         return model;
     }
@@ -40,8 +43,10 @@ public class VedioController {
      * @return
      */
     @RequestMapping(path = "list/data",method = RequestMethod.GET)
-    public AjaxResponse vedioListData(@PageableDefault Pageable pageable){
-        Page<Vedio> page = vedioService.findAll(null,pageable);
+    public AjaxResponse vedioListData(@PageableDefault(value = 10,sort = "lastUpdateTime",direction = Sort.Direction.DESC) Pageable pageable){
+        VedioQueryDTO vedioQueryDTO = new VedioQueryDTO();
+        vedioQueryDTO.setOnline(true);
+        Page<Vedio> page = vedioService.findAll(vedioQueryDTO,pageable);
         return AjaxResponse.success(page);
     }
 

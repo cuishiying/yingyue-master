@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+
+    <title>Title</title>
+    <style rel="stylesheet" type="text/css">
+        html{
+            font-size: 62.5%;
+        }
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        .data-item{
+            border-bottom: 1px solid #eee;
+            padding: 1rem 1rem 0 1rem;
+            display: block;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+        }
+        .data-item-title{
+            height: 2rem;
+            line-height: 2rem;
+            position: relative;
+        }
+        .data-item-title .name{
+            font-size: 1.8rem;
+        }
+        .data-item-content{
+            height: 3rem;
+            position: relative;
+        }
+        .data-item .jiantou{
+            position: absolute;
+            width: 1.5rem;
+            height: 1.5rem;
+            top:50%;
+            right: 1rem;
+        }
+        .data-item-footer{
+            height: 2rem;
+            line-height: 2rem;
+            position: relative;
+        }
+        .data-item-footer span{
+            margin-right: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="data-list">
+            <a href="#" class="data-item">
+                <div class="data-item-title">
+                    <div class="name">标题</div>
+                </div>
+                <div class="data-item-content">
+                    <div class="content">内容</div>
+                </div>
+                <div class="data-item-footer">
+                    <span class="author">作者</span>
+                    <span class="time">2017-10-12</span>
+                </div>
+                <span class="jiantou"></span>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

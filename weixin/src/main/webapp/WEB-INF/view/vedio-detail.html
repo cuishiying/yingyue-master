@@ -7,6 +7,8 @@
     <title>【视频】</title>
     <link rel="stylesheet" th:href="@{/static/assets/vendor/vedio/css/vedio.css}">
     <link rel="stylesheet" th:href="@{/static/assets/vendor/dropload-gh-pages/dist/dropload.css}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/static/assets/img/favicon.png}">
+
 </head>
 <body>
 <header>
@@ -86,7 +88,10 @@
                     "gpcflag":1,
                     "width":dWidth,
                     "height":dHeight,
-                    "lang":"zh_CN"
+                    "lang":"zh_CN",
+                    "skinnable":0,
+                    "posterType":1,
+                    "controls":1
                 });
             </script>
         </div>
@@ -96,11 +101,11 @@
                 <div class="flex_box row_wrap_box cross_center">
                     <div class="user flex_box cross_center">
                         <div class="user-head" style="background-image: url(&#39;http://img.pintu360.com/pintuplusVideo/4dc75141-1274-4a48-988d-c34630961d2b.jpg&#39;)"></div>
-                        <div class="article-author">李兴雨</div>
+                        <div class="article-author" th:text="${vedio.createdAdmin?.adminName}">李兴雨</div>
                     </div>
                     <div class="classify">影约</div>
                 </div>
-                <div class="article-date" th:text="${#temporals.format(vedio.createTime,'yyyy-MM-dd HH:mm')}">2017-10-27 18:10</div>
+                <div class="article-date" th:text="${#temporals.format(vedio.lastUpdateTime,'yyyy-MM-dd HH:mm')}">2017-10-27 18:10</div>
             </div>
             <div class="article-note">
                 <p th:text="${vedio.intro}">如你所知，全时便利店的全力猫已经一岁了，全力猫的故事才刚刚开始，全时便利店似乎赋予这个将要陪伴全时便利店及用户一起成长的IP更多的价值和内涵。</p>

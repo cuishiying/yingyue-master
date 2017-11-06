@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Profile | Klorofil - Free Bootstrap Dashboard Template</title>
+    <title>用户详情</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -43,7 +43,7 @@
                             <div class="profile-header">
                                 <div class="overlay"></div>
                                 <div class="profile-main">
-                                    <img th:src="@{/static/assets/img/user-medium.png}" class="img-circle" alt="Avatar">
+                                    <img th:src="${admin.headImg}"  class="img-circle" alt="Avatar" style="width: 77px;height: 77px">
                                     <h3 class="name" th:text="${admin.adminName}">Samuel Gold</h3>
                                     <span class="online-status status-available" th:text="${admin.accountNumber}">Available</span>
                                 </div>
@@ -130,11 +130,17 @@
                                             <label class="control-label">邮箱</label>
                                             <input type="text" class="form-control" th:value="${admin.email}" id="email">
                                         </div>
-
+                                        <div class="form-group" style="display: none">
+                                            <label class="control-label">头像</label>
+                                            <img src="" id="headImg">
+                                        </div>
                                         <div class="form-group pull-right">
+                                            <button type="button" class="btn btn-primary headImg-upload">上传头像</button>
                                             <button type="button" class="btn btn-primary save">更新</button>
                                         </div>
-
+                                    </form>
+                                    <form id="headImg-form" enctype="multipart/form-data">
+                                        <input id="uploadImg" type="file" name="file" accept="image/jpg,image/jpge,image/png" style="display: none">
                                     </form>
                                 </div>
                             </div>
@@ -157,6 +163,7 @@
 <!-- END WRAPPER -->
 <!-- Javascript -->
 <script th:src="@{/static/assets/vendor/jquery/jquery.js}"></script>
+<script th:src="@{/static/assets/vendor/jquery-form/jquery.form.js}"></script>
 <script th:src="@{/static/assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
 <script th:src="@{/static/assets/vendor/jquery-validation/jquery.validate.min.js}"></script>
 <script th:src="@{/static/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
@@ -185,6 +192,7 @@
         admin.qqNumber = $("#qqNumber").val();
         admin.weixin = $("#weixin").val();
         admin.birth = $("#birth").val();
+        admin.headImg = $("#headImg").attr("src");
         httpUtils.postJson(ctx + "admin/edit/" + id,admin,function(e){
             if (e.success) {
                 alert(e.data);
@@ -195,6 +203,31 @@
         });
 
     });
+
+    //点击名片
+    $(".headImg-upload").bind("click", function(e) {
+        $("#uploadImg").trigger("click").unbind("change").bind("change",function () {
+            if (!this.value) return;
+            $(this).parent().ajaxSubmit({
+                url: ctx + "upload/uploadImg",
+                type: "post",
+                beforeSend: function() {
+
+                },
+                success:function (result){
+                    console.log(result)
+                    if (result.success){
+                        $(".img-circle").attr("src",result.data);
+                        $("#headImg").attr("src",result.data);
+                    }else{
+                        alert(result.message);
+                    }
+                }, error: function(error) {
+                    alert("出错啦");
+                }
+            });
+        });
+    })
 
 </script>
 </body>

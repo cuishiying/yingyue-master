@@ -103,7 +103,7 @@
         </profile>
     </profiles>
     <build>
-        <finalName>yingyue-weixin</finalName>
+        <finalName>weixin</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
