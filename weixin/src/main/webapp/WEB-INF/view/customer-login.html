@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://m.pintu360.com/video.html -->
+<html lang="en" style="font-size: 55.2px;"  xmlns:th="http://www.thymeleaf.org">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>【登录】</title>
+    <link rel="stylesheet" th:href="@{/static/assets/css/login.css}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/static/assets/image/favicon.png}">
+
+</head>
+<body>
+<header>
+    <nav th:replace="common/fragment :: headbar"></nav>
+</header>
+<!--搜索弹框-->
+<div class="search-empty-wrap" style="height: 736px;">
+    <div class="search-top flex_box cross_center row_space_between">
+        <form action="http://m.pintu360.com/search.php" method="get" class="search-form flex_box cross_center">
+            <input type="text" name="k" id="keyword" placeholder="搜索">
+            <img class="search" onclick="search()" th:src="@{/static/assets/image/search.png}">
+        </form>
+        <div class="cancel">取消</div>
+    </div>
+</div>
+
+<div class="login_out">
+    <div class="login_tit">
+        <h6>账号登录</h6>
+    </div>
+    <div class="login_input_box login_box">
+        <form action="#">
+            <div class="current remain_enroll flex_box midCenter" style="display: none;" id="hint_error">
+                <img class="login_remain" th:src="@{/static/assets/image/login_remain.png}" alt="">
+                <span id="hint_error_text"></span>
+            </div>
+            <div class="text_box_l">
+                <input class="phone_email" name="loginName"  placeholder="手机/邮箱" type="text" onfocus="hint_error_colse()" autocomplete="off" >
+                <input class="phone_email_pw" name="password"  placeholder="密码" type="password" onfocus="hint_error_colse()" autocomplete="off" required>
+            </div>
+            <input type="button" class="login_btn" value="登录">
+            <ul class="login_b flex_box midCenter login_r_f">
+                <li><a th:href="@{/customer/regist}">快速注册</a></li>
+                <li><a href="http://m.pintu360.com/forget_pw.php">忘记密码？</a></li>
+            </ul>
+        </form>
+    </div>
+</div>
+
+<div class="content">
+</div>
+<script th:src="@{/static/assets/scripts/resize.js}"></script>
+<script th:src="@{/static/assets/vendor/jquery/jquery.js}"></script>
+<script th:src="@{/static/assets/utils/httpUtils.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+    var ctx = /*[[@{/}]]*/;
+
+    $(".login_btn").click(function() {
+        var loginName = $(".phone_email").val();
+        var password = $(".phone_email_pw").val();
+        $("#hint_error").hide();
+        if(login_name_verify(loginName) && login_pwd_verify(password)){
+            httpUtils.postParams(ctx + "customer/login",{"accountNumber":loginName,"password":password},function (e) {
+                if (e.success)
+                    window.location.href = ctx + "vedio/list";
+                else{
+                    console.log(e);
+                }
+            })
+        }
+    });
+
+    function login_name_verify(loginName){
+        if(loginName == null || loginName == ""){
+            $("#hint_error_text").text("用户名不能为空");
+            $("#hint_error").show();
+            return false;
+        }else{
+            $("#hint_error").hide();
+            return true;
+        }
+    }
+    function login_pwd_verify(password){
+        if(password == null || password == ""){
+            $("#hint_error_text").text("密码不能为空");
+            $("#hint_error").show();
+            return false;
+        }else{
+            $("#hint_error").hide();
+            return true;
+        }
+    }
+    function hint_error_colse(){
+        $("#hint_error").hide();
+    }
+
+</script>
+
+</body>
+</html>

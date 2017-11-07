@@ -5,6 +5,7 @@ import com.future.yingyue.base.AjaxResponse;
 import com.future.yingyue.dto.VedioQueryDTO;
 import com.future.yingyue.entity.Vedio;
 import com.future.yingyue.service.VedioService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/vedio")
@@ -28,7 +31,26 @@ public class VedioController {
      * @return
      */
     @RequestMapping
-    public ModelAndView vedioListView(@PageableDefault(value = 10,sort = "lastUpdateTime",direction = Sort.Direction.DESC) Pageable pageable){
+    public ModelAndView index(@PageableDefault(value = 10,sort = "lastUpdateTime",direction = Sort.Direction.DESC) Pageable pageable, HttpServletRequest request){
+        ModelAndView model = new ModelAndView("vedio-list");
+        Integer customerId = (Integer) request.getSession().getAttribute("customerId");
+        if (customerId == null){
+            model.setViewName("customer-login");
+        }else{
+            VedioQueryDTO vedioQueryDTO = new VedioQueryDTO();
+            vedioQueryDTO.setOnline(true);
+            Page<Vedio> page = vedioService.findAll(vedioQueryDTO,pageable);
+            model.addObject("page",page);
+        }
+        return model;
+    }
+
+    /**
+     * 视频列表
+     * @return
+     */
+    @RequestMapping(path = "/list",method = RequestMethod.GET)
+    public ModelAndView vedioListView(@PageableDefault(value = 10,sort = "lastUpdateTime",direction = Sort.Direction.DESC) Pageable pageable, HttpServletRequest request){
         ModelAndView model = new ModelAndView("vedio-list");
         VedioQueryDTO vedioQueryDTO = new VedioQueryDTO();
         vedioQueryDTO.setOnline(true);

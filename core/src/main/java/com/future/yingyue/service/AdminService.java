@@ -120,8 +120,17 @@ public class AdminService {
         return AjaxResponse.success();
     }
 
+    public AjaxResponse updatePhone(Integer adminId, String phone) {
+        Admin a = adminId != null ? adminRepository.findOne(adminId) : null;
+        if (a == null) return AjaxResponse.fail("用户不存在。");
+        Admin admin = adminRepository.findByPhone(phone);
+        if (admin != null) return AjaxResponse.fail("此手机号已注册。");
+        a.setPhone(phone);
+        return AjaxResponse.success();
+    }
+
     /**
-     * 密码重置
+     * 初始密码重置
      * @param phone
      * @return
      */

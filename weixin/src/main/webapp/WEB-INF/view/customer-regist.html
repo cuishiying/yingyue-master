@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://m.pintu360.com/video.html -->
+<html lang="en" style="font-size: 55.2px;"  xmlns:th="http://www.thymeleaf.org">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>【登录】</title>
+    <link rel="stylesheet" th:href="@{/static/assets/css/login.css}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/static/assets/image/favicon.png}">
+
+</head>
+<body>
+<header>
+    <nav th:replace="common/fragment :: headbar"></nav>
+</header>
+<!--搜索弹框-->
+<div class="search-empty-wrap" style="height: 736px;">
+    <div class="search-top flex_box cross_center row_space_between">
+        <form action="http://m.pintu360.com/search.php" method="get" class="search-form flex_box cross_center">
+            <input type="text" name="k" id="keyword" placeholder="搜索">
+            <img class="search" onclick="search()" th:src="@{/static/assets/image/search.png}">
+        </form>
+        <div class="cancel">取消</div>
+    </div>
+</div>
+
+<div class="login_out current" id="register_show">
+    <div class="login_tit">
+        <h6>账号注册</h6>
+    </div>
+    <div class="login_input_box register_box">
+        <form action="http://m.pintu360.com/enroll.php">
+            <div class="current remain_enroll flex_box midCenter" style="display: none;" id="hint_error">
+                <img class="login_remain" th:src="@{/static/assets/image/login_remain.png}" alt="">
+                <span id="hint_error_text">该手机号已被注册</span>
+            </div>
+            <div class="text_box_l">
+                <input onchange="" name="phone" class="enroll_user" style="display: block;" placeholder="手机" type="text">
+                <input onchange="" name="email" class="enroll_user" style="display: none;" placeholder="邮箱" type="text">
+                <input onchange="clientName_verify()" name="name" maxlength="10" class="phone_email" placeholder="用户名" type="text">
+                <input onchange="pwd_verify()" name="password" class="phone_email_pw" placeholder="密码" type="password">
+                <input onchange="pwd2_verify()" name="pwd2" class="phone_email_pw" placeholder="确认密码" type="password">
+                <div class="flex_box row_space_between cross_center">
+                    <input class="enroll_code form-code" name="codes" onchange="codes_verify()" type="text" placeholder="验证码">
+                    <div class="gain_code flex_box midCenter send-code" onclick="verify_code_loginName1(this)">获取验证码</div>
+                </div>
+            </div>
+            <input type="button" onclick="register()" class="register_btn" id="register_account" value="立即注册">
+            <ul class="login_b flex_box midCenter">
+                <li style="display: block;"><a href="javascript:" class="email-register">邮箱注册</a></li>
+                <li style="display: none;"><a href="javascript:" class="phone-register">手机注册</a></li>
+                <li><a href="http://m.pintu360.com/login.php">已有账号登录</a></li>
+            </ul>
+        </form>
+    </div>
+</div>
+<div class="success_enroll" id="register_succeed_show">
+    <h6>注册成功</h6>
+    <p>感谢您关注品途</p>
+    <a href="javascript:;">开启品途之旅(3s)</a>
+</div>
+<script th:src="@{/static/assets/scripts/resize.js}"></script>
+<script th:src="@{/static/assets/vendor/jquery/jquery.js}"></script>
+<script th:src="@{/static/assets/utils/httpUtils.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+    var ctx = /*[[@{/}]]*/;
+
+    //验证码验证登录账号
+    function verify_code_loginName1(obj){
+        verification_code(obj, get_loginName()[0], get_loginName()[1]);
+    }
+
+    function get_loginName(){
+        var loginName = [];
+        if($('input[name = "phone"]').css('display') == 'block'){
+            loginName[0] = $("input[name = 'phone']").val();
+            loginName[1] = 'phone';
+        }else if($('input[name = "email"]').css('display') == 'block'){
+            loginName[0] = $("input[name = 'email']").val();
+            loginName[1] = 'email';
+        }
+        return loginName;
+    }
+
+    function clientName_verify(){
+        var nameReg = /^[a-zA-Z0-9_\-\u4e00-\u9fa5]{1,10}$/;
+        if(!nameReg.test($("input[name = 'name']").val())){
+            $("#hint_error_text").text('用户名最长10个字符，仅支持中英文数字及"-"、"_"');
+            $("#hint_error").show();
+            return false;
+        }else {
+            $("#hint_error").hide();
+            return true;
+        }
+    }
+
+    function codes_verify(){
+        if($("input[name = 'codes']").val() == null || $("input[name = 'codes']").val() == ""){
+            $("#hint_error_text").text("验证码不能为空");
+            $("#hint_error").show();
+            return false;
+        }else {
+            $("#hint_error").hide();
+            return true;
+        }
+    }
+
+    function pwd_verify(){
+        var pwdReg = /^[a-zA-Z0-9\x21-\x7e]{6,16}$/;
+        if(!pwdReg.test($("input[name = 'password']").val())){
+            $("#hint_error_text").text("密码长度6-16位，支持数字、字母、字符");
+            $("#hint_error").show();
+            return false;
+        }else {
+            $("#hint_error").hide();
+            return true;
+        }
+    }
+
+    function pwd2_verify(){
+        if ($("input[name = 'password']").val() != $("input[name = 'pwd2']").val()) {
+            $("#hint_error_text").text("密码输入不一致");
+            $("#hint_error").show();
+            return false;
+        }else {
+            $("#hint_error").hide();
+            return true;
+        }
+    }
+
+    function register(){
+        var emp = new Object();
+        emp.accountNumber = $(".phone_email").val();
+        emp.adminName = $(".phone_email").val();
+        emp.phone = $(".enroll_user").val();
+        emp.idCard = "";
+        emp.password = $("input[name = 'password']").val();
+        password2 = $("input[name = 'pwd2']").val();
+        var code = $("input[name = 'codes']").val();
+
+        if(!emp.accountNumber||!emp.adminName||!emp.phone||!emp.password){
+            alert("您还有未填写的内容");
+            return;
+        }
+        if (!emp.password==password2) return;
+        $.ajax({
+            url: ctx + "customer/regist?code=" + code,
+            data: JSON.stringify(emp),
+            type: "post",
+            contentType: "application/json;charset=utf-8",
+            success: function(result) {
+                if (result.success) {
+                    alert("注册成功！");
+                    window.location.href = ctx + "customer/login";
+                }
+                else
+                    alert(result.message);
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>

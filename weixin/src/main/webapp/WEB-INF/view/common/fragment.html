@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+</head>
+<!-- NAVBAR -->
+<nav th:fragment="headbar">
+	<div class="g-header flex_box row_space_between cross_center">
+		<div class="g-search">
+			<img th:src="@{/static/assets/image/search.png}" class="search-logo" alt="">
+		</div>
+		<div class="flex_box">
+			<a href="http://m.baidu.com" class="logo"></a>
+			<!-- <span class="title" id="index_title"></span>-->
+		</div>
+		<div class="user">
+			<a th:href="@{/customer/login}" id="login_and_register" class="login_user" style="">
+				<img th:src="@{/static/assets/image/user.png}" alt="" class="login">
+			</a>
+		</div>
+	</div>
+</nav>
+<!-- END NAVBAR -->
+
+

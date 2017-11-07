@@ -1,41 +1,25 @@
 <!DOCTYPE html>
 <!-- saved from url=(0032)http://m.pintu360.com/video.html -->
-<html lang="en" style="font-size: 55.2px;"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
     <title>【视频】</title>
-    <link rel="stylesheet" th:href="@{/static/assets/vendor/vedio/css/vedio.css}">
+    <link rel="stylesheet" th:href="@{/static/assets/css/vedio.css}">
     <link rel="stylesheet" th:href="@{/static/assets/vendor/dropload-gh-pages/dist/dropload.css}">
-    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/static/assets/img/favicon.png}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/static/assets/image/favicon.png}">
 
 </head>
 <body>
 <header>
-    <div class="g-header flex_box row_space_between cross_center">
-        <div class="g-search">
-            <img th:src="@{/static/assets/vendor/vedio/image/search.png}" class="search-logo" alt="">
-        </div>
-        <div class="flex_box">
-            <a href="http://m.baidu.com" class="logo"></a>
-            <!-- <span class="title" id="index_title"></span>-->
-        </div>
-        <div class="user">
-            <a href="" id="login_and_register" class="login_user" style="">
-                <img th:src="@{/static/assets/vendor/vedio/image/user.png}" alt="" class="login">
-            </a>
-            <a href="" class="user-head client_head_img" style="background-image: url(./../static/assets/vendor/vedio/image/avatar_anonymous.png);display: none;">
-                <div class="red_circle"></div>
-            </a>
-        </div>
-    </div>
+    <nav th:replace="common/fragment :: headbar"></nav>
 </header>
 <!--搜索弹框-->
 <div class="search-empty-wrap" style="height: 736px;">
     <div class="search-top flex_box cross_center row_space_between">
         <form action="http://m.pintu360.com/search.php" method="get" class="search-form flex_box cross_center">
             <input type="text" name="k" id="keyword" placeholder="搜索">
-            <img class="search" onclick="search()" th:src="@{/static/assets/vendor/vedio/image/search.png}">
+            <img class="search" onclick="search()" th:src="@{/static/assets/image/search.png}">
         </form>
         <div class="cancel">取消</div>
     </div>
@@ -61,6 +45,7 @@
     </div>
 </div>
 
+<script th:src="@{/static/assets/scripts/resize.js}"></script>
 <script th:src="@{/static/assets/vendor/jquery/jquery.js}"></script>
 <script th:src="@{/static/assets/utils/httpUtils.js}"></script>
 <script th:src="@{/static/assets/vendor/dropload-gh-pages/dist/dropload.min.js}"></script>
