@@ -93,6 +93,7 @@
         emp.accountNumber = $(".user-name").val();
         emp.adminName = $(".user-name").val();
         emp.phone = $(".user-phone").val();
+        emp.email = $(".user-email").val();
         emp.password = $("input[name = 'password']").val();
         password2 = $("input[name = 'pwd2']").val();
         var code = $("input[name = 'codes']").val();
@@ -175,6 +176,27 @@
             return true;
         }
     }
+
+    $(function () {
+        $(".email-register").on('click',function () {
+            $("#hint_error").hide();
+            $('input[name="phone"]').unbind();
+            $("input[name='phone']").val("");
+            $('input[name="phone"]').hide();
+            $("input[name='email']").show();
+            $('.email-register').parents('li').hide();
+            $('.phone-register').parents('li').show();
+        })
+        $('.phone-register').on('click',function () {
+            $("#hint_error").hide();
+            $('input[name="email"]').unbind();
+            $("input[name='email']").val("");
+            $('input[name="phone"]').show();
+            $("input[name='email']").hide();
+            $('.phone-register').parents('li').hide();
+            $('.email-register').parents('li').show();
+        })
+    })
 
 </script>
 

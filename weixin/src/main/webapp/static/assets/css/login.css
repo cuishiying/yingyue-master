@@ -602,7 +602,7 @@ button {
   margin-bottom: 0.3rem;
   background-color: #FFFFFF;
 }
-.login_out .login_input_box .phone_email {
+.login_out .login_input_box .user-name {
   background-image: url(../image/p1.png);
   -webkit-background-size: 0.3rem auto;
   background-size: 0.3rem auto;
@@ -617,7 +617,7 @@ button {
   -webkit-background-size: 0.32rem auto;
   background-size: 0.32rem auto;
 }
-.login_out .login_input_box .enroll_user {
+.login_out .login_input_box .user-phone {
   background-image: url(../image/p3.png);
   -webkit-background-size: 0.24rem auto;
   background-size: 0.24rem auto;

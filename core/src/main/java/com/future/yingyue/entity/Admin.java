@@ -42,6 +42,7 @@ public class Admin extends BaseEntity {
     @Column(nullable = true, unique = true)
     private String idCard;//身份证
 
+    @Column(nullable = true, unique = true)
     private String email;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})

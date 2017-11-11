@@ -44,13 +44,14 @@ public class AdminService {
      * @return
      */
     public AjaxResponse regist(Admin admin){
+
         admin.setPassword(BCrypt.hashpw(admin.getPassword(), BCrypt.gensalt(4)));
         AdminRole adminRole = adminRoleRepository.findByRoleName("Customer");
-        //todo   判断手机号或者帐号是否已经存在
         admin.setAdminRole(adminRole);
         try{
             adminRepository.save(admin);
         }catch (Exception e){
+            //手机号或者帐号唯一字段
             return AjaxResponse.fail("您的帐号已存在");
         }
         return AjaxResponse.success("注册成功");
