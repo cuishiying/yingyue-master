@@ -66,9 +66,17 @@ public class CustomerController {
 
     @RequestMapping(path = "/sendCode", method = RequestMethod.POST)
     public AjaxResponse sendCode(String phone) {
+        String code = "";
         if (!this.validPhone(phone))
             return AjaxResponse.fail("手机号格式不正确");
-        String code = verifyCodeService.get(phone);
+        try{
+            // TODO: 2017/11/11  
+           code = verifyCodeService.get(phone);
+        }catch (Exception e){
+            e.printStackTrace();
+            return AjaxResponse.fail("验证码发送失败！");
+        }
+
         SmsParams params = new SmsParams();
         params.setCode(code);
         params.setProduct("莎蔓莉莎");

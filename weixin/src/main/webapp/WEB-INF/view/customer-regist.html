@@ -35,14 +35,14 @@
                 <span id="hint_error_text">该手机号已被注册</span>
             </div>
             <div class="text_box_l">
-                <input onchange="" name="phone" class="enroll_user" style="display: block;" placeholder="手机" type="text">
-                <input onchange="" name="email" class="enroll_user" style="display: none;" placeholder="邮箱" type="text">
-                <input onchange="clientName_verify()" name="name" maxlength="10" class="phone_email" placeholder="用户名" type="text">
+                <input onchange="" name="phone" class="user-phone" style="display: block;" placeholder="手机" type="text">
+                <input onchange="" name="email" class="user-email" style="display: none;" placeholder="邮箱" type="text">
+                <input onchange="clientName_verify()" name="name" maxlength="10" class="user-name" placeholder="用户名" type="text">
                 <input onchange="pwd_verify()" name="password" class="phone_email_pw" placeholder="密码" type="password">
                 <input onchange="pwd2_verify()" name="pwd2" class="phone_email_pw" placeholder="确认密码" type="password">
                 <div class="flex_box row_space_between cross_center">
                     <input class="enroll_code form-code" name="codes" onchange="codes_verify()" type="text" placeholder="验证码">
-                    <div class="gain_code flex_box midCenter send-code" onclick="verify_code_loginName1(this)">获取验证码</div>
+                    <div class="gain_code flex_box midCenter send-code">获取验证码</div>
                 </div>
             </div>
             <input type="button" onclick="register()" class="register_btn" id="register_account" value="立即注册">
@@ -61,13 +61,61 @@
 </div>
 <script th:src="@{/static/assets/scripts/resize.js}"></script>
 <script th:src="@{/static/assets/vendor/jquery/jquery.js}"></script>
+<script th:src="@{/static/assets/vendor/countdown/countdown.js}"></script>
 <script th:src="@{/static/assets/utils/httpUtils.js}"></script>
 <script type="text/javascript" th:inline="javascript">
     var ctx = /*[[@{/}]]*/;
 
     //验证码验证登录账号
-    function verify_code_loginName1(obj){
-        verification_code(obj, get_loginName()[0], get_loginName()[1]);
+    $('.send-code').click(function (e) {
+            var curCount = countDown($(".send-code"));
+            console.log(curCount)
+            if(curCount==60){
+                sendCode();
+            }
+        }
+    );
+
+    function sendCode() {
+        var phone = $(".user-phone").val();
+        httpUtils.postParams(ctx+"customer/sendCode",{"phone":phone},function (e) {
+            if(!e.success){
+                alert(e.message);
+            }else{
+                alert(e.data)
+            }
+        })
+    }
+
+
+    function register(){
+        var emp = new Object();
+        emp.accountNumber = $(".user-name").val();
+        emp.adminName = $(".user-name").val();
+        emp.phone = $(".user-phone").val();
+        emp.password = $("input[name = 'password']").val();
+        password2 = $("input[name = 'pwd2']").val();
+        var code = $("input[name = 'codes']").val();
+
+        if(!emp.accountNumber||!emp.adminName||!emp.phone||!emp.password){
+            alert("您还有未填写的内容");
+            return;
+        }
+        if (!emp.password==password2) return;
+        $.ajax({
+            url: ctx + "customer/regist?code=" + code,
+            data: JSON.stringify(emp),
+            type: "post",
+            contentType: "application/json;charset=utf-8",
+            success: function(result) {
+                if (result.success) {
+                    alert("注册成功！");
+                    window.location.href = ctx + "customer/login";
+                }
+                else
+                    alert(result.message);
+            }
+        });
     }
 
     function get_loginName(){
@@ -126,37 +174,6 @@
             $("#hint_error").hide();
             return true;
         }
-    }
-
-    function register(){
-        var emp = new Object();
-        emp.accountNumber = $(".phone_email").val();
-        emp.adminName = $(".phone_email").val();
-        emp.phone = $(".enroll_user").val();
-        emp.idCard = "";
-        emp.password = $("input[name = 'password']").val();
-        password2 = $("input[name = 'pwd2']").val();
-        var code = $("input[name = 'codes']").val();
-
-        if(!emp.accountNumber||!emp.adminName||!emp.phone||!emp.password){
-            alert("您还有未填写的内容");
-            return;
-        }
-        if (!emp.password==password2) return;
-        $.ajax({
-            url: ctx + "customer/regist?code=" + code,
-            data: JSON.stringify(emp),
-            type: "post",
-            contentType: "application/json;charset=utf-8",
-            success: function(result) {
-                if (result.success) {
-                    alert("注册成功！");
-                    window.location.href = ctx + "customer/login";
-                }
-                else
-                    alert(result.message);
-            }
-        });
     }
 
 </script>

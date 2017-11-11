@@ -7,6 +7,7 @@ import com.future.yingyue.entity.AdminRole;
 import com.future.yingyue.enums.AuditStatus;
 import com.future.yingyue.repository.AdminRepository;
 import com.future.yingyue.repository.AdminRoleRepository;
+import com.future.yingyue.utils.StrUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,6 +38,11 @@ public class AdminService {
     private AdminRoleRepository adminRoleRepository;
 
 
+    /**
+     * 用户注册
+     * @param admin
+     * @return
+     */
     public AjaxResponse regist(Admin admin){
         admin.setPassword(BCrypt.hashpw(admin.getPassword(), BCrypt.gensalt(4)));
         AdminRole adminRole = adminRoleRepository.findByRoleName("Customer");
@@ -50,6 +56,12 @@ public class AdminService {
         return AjaxResponse.success("注册成功");
     }
 
+    /**
+     * 分页获取用户列表
+     * @param queryDTO
+     * @param pageable
+     * @return
+     */
     public Page<Admin> getCustomers(AdminQueryDTO queryDTO,Pageable pageable){
         Specification<Admin> spec = this.getWhereClause(queryDTO);
         try{
@@ -98,8 +110,22 @@ public class AdminService {
         };
     }
 
-    public AjaxResponse login(String accountNumber, String password){
-        Admin admin = StringUtils.isNotBlank(accountNumber) ? adminRepository.findByAccountNumber(accountNumber) : null;
+    /**
+     * 客户登录，可手机号、邮箱、帐号登录
+     * @param username
+     * @param password
+     * @return
+     */
+    public AjaxResponse login(String username, String password){
+
+        Admin admin = null;
+        if(StrUtils.isMobile(username)){
+            admin = StringUtils.isNotBlank(username) ? adminRepository.findByPhone(username) : null;
+        }else if(StrUtils.isEmail(username)){
+            admin = StringUtils.isNotBlank(username) ? adminRepository.findByEmail(username) : null;
+        }else{
+            admin = StringUtils.isNotBlank(username) ? adminRepository.findByAccountNumber(username) : null;
+        }
         if (admin == null) return AjaxResponse.fail("帐号不存在");
         if (!BCrypt.checkpw(password, admin.getPassword()))
             return AjaxResponse.fail("密码错误");
@@ -169,6 +195,11 @@ public class AdminService {
         }
     }
 
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
     public AjaxResponse deleteAdmin(int id){
         Admin admin = adminRepository.findById(id);
         if(admin.getAccountNumber().equals("admin")){
@@ -184,6 +215,10 @@ public class AdminService {
 
     }
 
+    /**
+     * 获取所有角色
+     * @return
+     */
     public List<AdminRole> findAllAdminRoles(){
         List<AdminRole> list = adminRoleRepository.findAll();
         return list;

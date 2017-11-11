@@ -35,7 +35,7 @@
                 <span id="hint_error_text"></span>
             </div>
             <div class="text_box_l">
-                <input class="phone_email" name="loginName"  placeholder="手机/邮箱" type="text" onfocus="hint_error_colse()" autocomplete="off" >
+                <input class="phone_email" name="loginName"  placeholder="帐号/手机/邮箱" type="text" onfocus="hint_error_colse()" autocomplete="off" >
                 <input class="phone_email_pw" name="password"  placeholder="密码" type="password" onfocus="hint_error_colse()" autocomplete="off" required>
             </div>
             <input type="button" class="login_btn" value="登录">
@@ -65,6 +65,7 @@
                     window.location.href = ctx + "vedio/list";
                 else{
                     console.log(e);
+                    show_error(e.message);
                 }
             })
         }
@@ -92,6 +93,10 @@
     }
     function hint_error_colse(){
         $("#hint_error").hide();
+    }
+    function show_error(e){
+        $("#hint_error_text").text(e);
+        $("#hint_error").show();
     }
 
 </script>

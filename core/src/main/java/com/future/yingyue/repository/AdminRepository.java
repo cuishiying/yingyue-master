@@ -16,6 +16,7 @@ public interface AdminRepository extends JpaRepository<Admin, Integer>,JpaSpecif
     Admin findByAdminName(String adminName);
     Admin findById(Integer id);
     Admin findByPhone(String phone);
+    Admin findByEmail(String email);
 
     @Query("select c from Admin c where  c.adminRole = ?1")
     Page<Admin> findAllEmployee(AdminRole role, Pageable pageable);

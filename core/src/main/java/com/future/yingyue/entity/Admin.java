@@ -39,7 +39,7 @@ public class Admin extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String phone;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String idCard;//身份证
 
     private String email;

@@ -22,7 +22,7 @@ public class VerifyCodeServiceImpl implements VerifyCodeService {
 	@Override
 	public String get(String key) {
 		String code = generateCode(DEFAULT_CODE_LENGTH);
-		redisTemplate.opsForValue().set(KEY_PREFIX + key, code, DEFAULT_TIMEOUT, TimeUnit.MINUTES);
+//		redisTemplate.opsForValue().set(KEY_PREFIX + key, code, DEFAULT_TIMEOUT, TimeUnit.MINUTES);
 		return code;
 	}
 
