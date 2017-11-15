@@ -141,6 +141,7 @@
 <script th:src="@{/static/assets/scripts/klorofil-common.js}"></script>
 <script th:src="@{/static/assets/vendor/datetimepicker/js/jquery.datetimepicker.full.js}"></script>
 <script th:src="@{/static/assets/utils/httpUtils.js}"></script>
+<script th:src="@{/static/assets/utils/fetchUtils.js}"></script>
 
 <script type="text/javascript" th:inline="javascript">
     var ctx = /*[[@{/}]]*/;
@@ -155,15 +156,16 @@
 
     //删除客户
     $(".delete").click(function () {
-        httpUtils.postParams(ctx+"admin/delete/"+$(this).attr("value"),"",function (e) {
+        $.postParams(ctx+"admin/delete/"+$(this).attr("value"),"",function (e) {
             if(e.success){
                 alert(e.data);
                 window.location.reload();
             }else{
                 alert(e.message);
             }
-        })
-    })
+        });
+    });
+
 </script>
 </body>
 </html>

@@ -1,14 +1,10 @@
-/**
- * Created by vincent on 2017-1-13.
- */
-var httpUtils;
-httpUtils={
+$.extend({
     getData:function (url,callback) {
         $.ajax({
             url:url,
             type:"get",
             success:function(result) {
-               callback(result);
+                callback(result);
             },
             error:function(e) {
                 callback(e);
@@ -41,6 +37,5 @@ httpUtils={
                 callback(e);
             }
         });
-    },
-    
-}
+    }
+})
