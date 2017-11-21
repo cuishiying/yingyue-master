@@ -29,8 +29,13 @@
             
         2、报名
         
-###3、接口
+###3、接口：
         
         1、初始化接口
         2、导入导出接口
         3、pv统计
+        
+###4、直播方案：
+        
+        1、rtsp-ffmpeg-nginx-hls
+        2、ffmpeg -i "rtsp://admin:slkj0520@192.168.0.100:554/h264/ch1/main/av_stream"  -vcodec copy -acodec aac -ar 44100 -strict -2 -ac 1 -f hls -s 1280x720 -q 10 -hls_wrap  15 D:/app/nginx-1.12.2/html/hls/slkj.m3u8

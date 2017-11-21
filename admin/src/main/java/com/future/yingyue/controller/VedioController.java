@@ -110,4 +110,14 @@ public class VedioController {
         model.addObject("vedio",vedio);
         return model;
     }
+
+    /**
+     * 直播测试
+     * @return
+     */
+    @RequestMapping(path = "/hls",method = RequestMethod.GET)
+    public ModelAndView debug(){
+        ModelAndView model = new ModelAndView("vedio-hls");
+        return model;
+    }
 }
