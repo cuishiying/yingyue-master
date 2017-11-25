@@ -51,6 +51,10 @@
             <artifactId>thymeleaf-extras-java8time</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.future.yingyue</groupId>
             <artifactId>yingyue-core</artifactId>
             <version>${project.version}</version>
