@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:sec="http://www.springframework.org/schema/security"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!--统计在线用户需要使用session管理-->
+    <bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" />
+    <bean id="sas" class="org.springframework.security.web.authentication.session.CompositeSessionAuthenticationStrategy">
+        <constructor-arg>
+            <list>
+                <bean class="org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy">
+                    <!--这里引用上面的sessionRegistry-->
+                    <constructor-arg ref="sessionRegistry" />
+                    <!--每个用户最大的session数目，单点登录-->
+                    <property name="maximumSessions" value="1" />
+                    <!--设置第二次登录的时候剔除谁-->
+                    <property name="exceptionIfMaximumExceeded" value="true" />
+                </bean>
+                <bean class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy" />
+                <bean class="org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy">
+                    <!--这里引用上面的sessionRegistry-->
+                    <constructor-arg ref="sessionRegistry" />
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!--会话管理配置-->
+    <!--<sec:http auto-config="true">-->
+        <!--<sec:session-management session-authentication-strategy-ref="sas"/>-->
+    <!--</sec:http>-->
+
+    <!--<sec:authentication-manager>-->
+        <!--<sec:authentication-provider>-->
+            <!--<sec:user-service>-->
+                <!--<sec:user name="admin" password="admin" authorities="ROLE_ADMIN" />-->
+            <!--</sec:user-service>-->
+        <!--</sec:authentication-provider>-->
+    <!--</sec:authentication-manager>-->
+</beans>

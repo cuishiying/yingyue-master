@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -21,7 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 @RestController
@@ -31,6 +35,9 @@ public class AdminController {
     private AdminService adminService;
     @Autowired
     private ExcelService excelService;
+
+    @Autowired
+    private SessionRegistry sessionRegistry;
 
     /**
      * hasAnyAuthority-url请求权限控制
@@ -90,5 +97,16 @@ public class AdminController {
     public AjaxResponse exportExcel(HttpServletResponse response) {
         excelService.exportAdmin(response);
         return AjaxResponse.success();
+    }
+
+    @ResponseBody
+    @RequestMapping("/list")
+    public List getSessions(){
+        List names = new ArrayList<String>();
+        List allPrincipals = sessionRegistry.getAllPrincipals();
+        for(Object a:allPrincipals){
+            names.add(a);
+        }
+        return names;
     }
 }

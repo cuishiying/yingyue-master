@@ -3,17 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/static/assets/img/favicon.png}">
+
 </head>
 <body>
     <div>
-        <form th:action="@{/vedio}" method="get">
-            <div class="controller form-inline">
-                <input type="text" class="form-control date" placeholder="开始时间" name="beginDate" th:value="${queryDTO.beginDate?.toString()}">
-                <input type="text" class="form-control date" placeholder="结束时间" name="endDate" th:value="${queryDTO.endDate?.toString()}">
-                <button type="submit" class="btn btn-primary">搜索</button>
-            </div>
-        </form>
-    </div>
 
+    </div>
+    <script th:src="@{/static/assets/vendor/jquery/jquery.js}"></script>
+    <script type="text/javascript">
+        $(function() {
+//            console.log("abc");
+            $.ajax({url:"http://localhost:8080/push/login/4",success:function(result){
+                console.log(result);
+                var ws = new WebSocket("ws://localhost:8080/ws")
+                ws.onopen = function () {
+                    console.log("onpen");
+                    ws.send("{}");
+                }
+                ws.onclose = function () {
+                    console.log("onclose");
+                }
+
+                ws.onmessage = function (msg) {
+                    console.log(msg.data);
+                }
+            }});
+        })
+    </script>
 </body>
 </html>
